@@ -8,7 +8,7 @@
             <h1 class="page-title">Edit Student</h1>
             <div class="flex items-center gap-3">
                 <img src="{{ $student->photo_url }}" class="w-10 h-10 rounded-full object-cover ring-1 ring-slate-200 dark:ring-slate-800" alt="">
-                <span class="subtle">{{ $student->first_name }} {{ $student->last_name }}</span>
+                <span class="subtle">{{ $student->first_name }} {{ $student->second_name }}</span>
             </div>
         </div>
         <div class="card-body">
@@ -17,7 +17,7 @@
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <x-form.input label="First name" name="first_name" :value="$student->first_name" required />
-                    <x-form.input label="Last name" name="last_name" :value="$student->last_name" required />
+                    <x-form.input label="Second name" name="second_name" :value="$student->second_name" required />
                     <x-form.input label="Date of birth" name="dob" type="date" :value="optional($student->dob)->format('Y-m-d')" />
                     <x-form.select label="Gender" name="gender">
                         <option value="">—</option>
@@ -25,6 +25,10 @@
                         <option value="female" @selected(old('gender', $student->gender)==='female')>Female</option>
                         <option value="other" @selected(old('gender', $student->gender)==='other')>Other</option>
                     </x-form.select>
+                    <x-form.input label="Father's Name" name="father_name" :value="$student->father_name" />
+                    <x-form.input label="Mother's Name" name="mother_name" :value="$student->mother_name" />
+                    <x-form.input label="Email" name="email" type="email" :value="$student->email" />
+                    <x-form.input label="Emergency Phone" name="emergency_phone" :value="$student->emergency_phone" />
                     <x-form.input label="Phone" name="phone" :value="$student->phone" />
                     <x-form.select label="Parent" name="parent_user_id">
                         <option value="">—</option>
@@ -32,11 +36,6 @@
                             <option value="{{ $p->id }}" @selected(old('parent_user_id', $student->parent_user_id)==$p->id)>{{ $p->name }} ({{ $p->email }})</option>
                         @endforeach
                     </x-form.select>
-                    <x-form.select label="Status" name="status">
-                        <option value="active" @selected(old('status', $student->status ?? 'active')==='active')>Active</option>
-                        <option value="inactive" @selected(old('status', $student->status)==='inactive')>Inactive</option>
-                    </x-form.select>
-                    <x-form.input label="Joined at" name="joined_at" type="date" :value="optional($student->joined_at)->format('Y-m-d')" />
                     <x-form.select label="Branch" name="branch_id">
                         <option value="">—</option>
                         @foreach($branches as $b)
@@ -49,8 +48,20 @@
                             <option value="{{ $g->id }}" @selected(old('group_id', $student->group_id)==$g->id)>{{ $g->name }}</option>
                         @endforeach
                     </x-form.select>
+                    <x-form.input label="Combination" name="combination" :value="$student->combination" placeholder="e.g., A1, B2" />
+                    <x-form.input label="Membership Type" name="membership_type" :value="$student->membership_type" placeholder="e.g., Monthly, Yearly" />
                     <x-form.input label="Jersey Number" name="jersey_number" :value="$student->jersey_number" placeholder="e.g., 10" />
-                    <x-form.input label="Jersey Name" name="jersey_name" :value="$student->jersey_name" placeholder="e.g., RONALDO" />
+                    <x-form.input label="Name on Jersey" name="jersey_name" :value="$student->jersey_name" placeholder="e.g., RONALDO" />
+                    <x-form.input label="Sport Discipline" name="sport_discipline" :value="$student->sport_discipline" placeholder="e.g., Football, Basketball" />
+                    <x-form.input label="Name of the School" name="school_name" :value="$student->school_name" />
+                    <x-form.input label="Position" name="position" :value="$student->position" placeholder="e.g., Forward, Midfielder" />
+                    <x-form.input label="Coach" name="coach" :value="$student->coach" />
+                    <x-form.input label="Program" name="program" :value="$student->program" placeholder="e.g., Youth Development" />
+                    <x-form.input label="Joined at" name="joined_at" type="date" :value="optional($student->joined_at)->format('Y-m-d')" />
+                    <x-form.select label="Status" name="status">
+                        <option value="active" @selected(old('status', $student->status ?? 'active')==='active')>Active</option>
+                        <option value="inactive" @selected(old('status', $student->status)==='inactive')>Inactive</option>
+                    </x-form.select>
                     <div class="md:col-span-2">
                         <label class="label mb-1">Photo</label>
                         <div class="flex items-center gap-4">

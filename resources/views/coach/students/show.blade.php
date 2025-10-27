@@ -11,27 +11,75 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <div class="text-sm text-neutral-500">Name</div>
-                <div class="font-medium">{{ $student->first_name }} {{ $student->last_name }}</div>
+                <div class="font-medium">{{ $student->first_name }} {{ $student->second_name }}</div>
             </div>
             <div>
                 <div class="text-sm text-neutral-500">Status</div>
                 <div class="font-medium">{{ ucfirst($student->status ?? 'active') }}</div>
             </div>
             <div>
-                <div class="text-sm text-neutral-500">Branch / Group</div>
-                <div class="font-medium">{{ $student->branch?->name ?? '—' }} / {{ $student->group?->name ?? '—' }}</div>
-            </div>
-            <div>
-                <div class="text-sm text-neutral-500">Parent</div>
-                <div class="font-medium">{{ $student->parent?->name ?? '—' }}</div>
+                <div class="text-sm text-neutral-500">Email</div>
+                <div class="font-medium">{{ $student->email ?? '—' }}</div>
             </div>
             <div>
                 <div class="text-sm text-neutral-500">Phone</div>
                 <div class="font-medium">{{ $student->phone ?? '—' }}</div>
             </div>
             <div>
+                <div class="text-sm text-neutral-500">Emergency Phone</div>
+                <div class="font-medium">{{ $student->emergency_phone ?? '—' }}</div>
+            </div>
+            <div>
                 <div class="text-sm text-neutral-500">Date of Birth</div>
                 <div class="font-medium">{{ optional($student->dob)->format('M d, Y') ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Branch / Group</div>
+                <div class="font-medium">{{ $student->branch?->name ?? '—' }} / {{ $student->group?->name ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Sport Discipline</div>
+                <div class="font-medium">{{ $student->sport_discipline ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Position</div>
+                <div class="font-medium">{{ $student->position ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Coach</div>
+                <div class="font-medium">{{ $student->coach ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Father's Name</div>
+                <div class="font-medium">{{ $student->father_name ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Mother's Name</div>
+                <div class="font-medium">{{ $student->mother_name ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Parent</div>
+                <div class="font-medium">{{ $student->parent?->name ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">School</div>
+                <div class="font-medium">{{ $student->school_name ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Jersey Number</div>
+                <div class="font-medium">{{ $student->jersey_number ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Jersey Name</div>
+                <div class="font-medium">{{ $student->jersey_name ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Membership Type</div>
+                <div class="font-medium">{{ $student->membership_type ?? '—' }}</div>
+            </div>
+            <div>
+                <div class="text-sm text-neutral-500">Program</div>
+                <div class="font-medium">{{ $student->program ?? '—' }}</div>
             </div>
             <div>
                 <div class="text-sm text-neutral-500">Joined</div>

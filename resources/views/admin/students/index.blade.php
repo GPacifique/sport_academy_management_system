@@ -17,9 +17,9 @@
             @foreach ($students as $student)
                 <div class="card overflow-hidden">
                     <div class="card-body flex items-center gap-4">
-                        <img src="{{ $student->photo_url }}" alt="{{ $student->first_name }} {{ $student->last_name }}" class="w-16 h-16 rounded-full object-cover ring-2 ring-slate-200 dark:ring-slate-800">
+                        <img src="{{ $student->photo_url }}" alt="{{ $student->first_name }} {{ $student->second_name }}" class="w-16 h-16 rounded-full object-cover ring-2 ring-slate-200 dark:ring-slate-800">
                         <div class="min-w-0">
-                            <div class="font-semibold text-slate-900 dark:text-slate-100 truncate">{{ $student->first_name }} {{ $student->last_name }}</div>
+                            <div class="font-semibold text-slate-900 dark:text-slate-100 truncate">{{ $student->first_name }} {{ $student->second_name }}</div>
                             <div class="subtle truncate">{{ $student->branch?->name ?? '—' }} @if($student->group) • Group {{ $student->group->name }} @endif</div>
                             @if($student->parent)
                                 <div class="text-xs text-slate-500 dark:text-slate-400 truncate">Parent: <span class="text-slate-700 dark:text-slate-300">{{ $student->parent->name }}</span> • <span class="truncate inline-block align-bottom">{{ $student->parent->email }}</span></div>
@@ -27,6 +27,9 @@
                             <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
                                 @if($student->status)
                                     <span class="badge {{ $student->status === 'active' ? 'badge-green' : 'badge-slate' }}">{{ ucfirst($student->status) }}</span>
+                                @endif
+                                @if($student->sport_discipline)
+                                    <span class="badge badge-indigo">🏆 {{ $student->sport_discipline }}</span>
                                 @endif
                                 @if($student->phone)
                                     <span class="badge badge-slate">📞 {{ $student->phone }}</span>
@@ -53,6 +56,7 @@
                         <th>Name</th>
                         <th>Branch</th>
                         <th>Group</th>
+                        <th>Sport</th>
                         <th>Parent</th>
                         <th>Phone</th>
                         <th>Status</th>
@@ -66,11 +70,18 @@
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-3">
                                     <img src="{{ $student->photo_url }}" class="w-10 h-10 rounded-full object-cover ring-1 ring-slate-200 dark:ring-slate-800" alt="">
-                                    <span>{{ $student->first_name }} {{ $student->last_name }}</span>
+                                    <span>{{ $student->first_name }} {{ $student->second_name }}</span>
                                 </div>
                             </td>
                             <td class="px-4 py-3">{{ $student->branch?->name ?? '—' }}</td>
                             <td class="px-4 py-3">{{ $student->group?->name ?? '—' }}</td>
+                            <td class="px-4 py-3">
+                                @if($student->sport_discipline)
+                                    <span class="badge badge-indigo">🏆 {{ $student->sport_discipline }}</span>
+                                @else
+                                    —
+                                @endif
+                            </td>
                             <td class="px-4 py-3">
                                 @if($student->parent)
                                     <div class="leading-tight">

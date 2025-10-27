@@ -36,9 +36,13 @@ class StudentsController extends Controller
     {
         $data = $request->validate([
             'first_name' => ['required','string','max:255'],
-            'last_name' => ['required','string','max:255'],
+            'second_name' => ['required','string','max:255'],
             'dob' => ['nullable','date'],
             'gender' => ['nullable', Rule::in(['male','female','other'])],
+            'father_name' => ['nullable','string','max:255'],
+            'email' => ['nullable','email','max:255'],
+            'emergency_phone' => ['nullable','string','max:50'],
+            'mother_name' => ['nullable','string','max:255'],
             'phone' => ['nullable','string','max:50'],
             'status' => ['nullable', Rule::in(['active','inactive'])],
             'joined_at' => ['nullable','date'],
@@ -46,10 +50,20 @@ class StudentsController extends Controller
             'group_id' => ['nullable', Rule::exists('groups','id')],
             'parent_user_id' => ['nullable', Rule::exists('users','id')],
             'photo' => ['nullable','image','max:2048'],
+            'sport_discipline' => ['nullable','string','max:255'],
+            'jersey_number' => ['nullable','string','max:50'],
+            'jersey_name' => ['nullable','string','max:255'],
+            'school_name' => ['nullable','string','max:255'],
+            'position' => ['nullable','string','max:255'],
+            'coach' => ['nullable','string','max:255'],
+            'combination' => ['nullable','string','max:255'],
+            'membership_type' => ['nullable','string','max:255'],
+            'program' => ['nullable','string','max:255'],
         ]);
 
         $student = new Student($data);
         $student->status = $student->status ?? 'active';
+        $student->registered_by = auth()->id();
         $student->save();
 
         if ($request->hasFile('photo')) {
@@ -73,9 +87,13 @@ class StudentsController extends Controller
     {
         $data = $request->validate([
             'first_name' => ['required','string','max:255'],
-            'last_name' => ['required','string','max:255'],
+            'second_name' => ['required','string','max:255'],
             'dob' => ['nullable','date'],
             'gender' => ['nullable', Rule::in(['male','female','other'])],
+            'father_name' => ['nullable','string','max:255'],
+            'email' => ['nullable','email','max:255'],
+            'emergency_phone' => ['nullable','string','max:50'],
+            'mother_name' => ['nullable','string','max:255'],
             'phone' => ['nullable','string','max:50'],
             'status' => ['nullable', Rule::in(['active','inactive'])],
             'joined_at' => ['nullable','date'],
@@ -83,6 +101,15 @@ class StudentsController extends Controller
             'group_id' => ['nullable', Rule::exists('groups','id')],
             'parent_user_id' => ['nullable', Rule::exists('users','id')],
             'photo' => ['nullable','image','max:2048'],
+            'sport_discipline' => ['nullable','string','max:255'],
+            'jersey_number' => ['nullable','string','max:50'],
+            'jersey_name' => ['nullable','string','max:255'],
+            'school_name' => ['nullable','string','max:255'],
+            'position' => ['nullable','string','max:255'],
+            'coach' => ['nullable','string','max:255'],
+            'combination' => ['nullable','string','max:255'],
+            'membership_type' => ['nullable','string','max:255'],
+            'program' => ['nullable','string','max:255'],
         ]);
 
         $student->fill($data);
