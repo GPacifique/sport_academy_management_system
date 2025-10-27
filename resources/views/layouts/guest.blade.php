@@ -11,13 +11,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        {{-- Load Vite assets if present; otherwise fallback to inline CSS --}}
-        @php($hasManifest = file_exists(public_path('build/manifest.json')))
-        @if($hasManifest)
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-            <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
-        @endif
+        {{-- Inline CSS/JS (no external assets) --}}
+        @include('partials.inline-styles')
+        @include('partials.inline-scripts')
     </head>
     <body class="font-sans text-gray-900 antialiased flex flex-col min-h-screen">
         <div class="flex-1 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
