@@ -9,10 +9,13 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Inline CSS (Tailwind Fallback for Production) -->
-    <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
-    
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    {{-- Load Vite assets if present; otherwise fallback to inline CSS --}}
+    @php($hasManifest = file_exists(public_path('build/manifest.json')))
+    @if($hasManifest)
+        @vite(['resources/css/app.css','resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
+    @endif
     @stack('head')
 </head>
 <body class="font-sans antialiased">
