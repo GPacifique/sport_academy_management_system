@@ -10,12 +10,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
 
-        <!-- Styles / Scripts: Prefer built assets if available, otherwise inline fallback -->
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-            @include('partials.inline-styles')
-        @endif
+        <!-- Custom CSS (No Tailwind) -->
+        <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
     </head>
     <body class="font-sans antialiased bg-white">
         <!-- Navigation -->
@@ -395,6 +391,10 @@
                 el.style.pointerEvents = 'auto';
                 el.style.cursor = 'pointer';
             });
+        </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    </body>
+</html>
         </script>
     </body>
 </html>

@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
 
-    @include('partials.inline-styles')
+    <!-- Custom CSS (No Tailwind) -->
+    <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
     @stack('head')
 </head>
 <body class="font-sans antialiased bg-slate-50 dark:bg-slate-900">
@@ -195,6 +196,7 @@
     </div>
 
     @include('partials.inline-scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

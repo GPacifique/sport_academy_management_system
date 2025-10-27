@@ -11,9 +11,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        {{-- Inline CSS/JS (no external assets) --}}
-        @include('partials.inline-styles')
-        @include('partials.inline-scripts')
+        {{-- Custom CSS (No Tailwind) --}}
+        <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
     </head>
     <body class="font-sans text-gray-900 antialiased flex flex-col min-h-screen">
         <div class="flex-1 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
@@ -30,5 +29,6 @@
 
         <!-- Footer -->
         <x-app-footer />
+    <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
