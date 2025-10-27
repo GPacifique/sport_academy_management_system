@@ -10,8 +10,12 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
 
-        <!-- Inline Styles -->
-        @include('partials.inline-styles')
+        <!-- Styles / Scripts: Prefer built assets if available, otherwise inline fallback -->
+        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @else
+            @include('partials.inline-styles')
+        @endif
     </head>
     <body class="font-sans antialiased bg-white">
         <!-- Navigation -->
@@ -369,7 +373,7 @@
                 </div>
             </div>
         </footer>
-        @include('partials.inline-scripts')
+    @include('partials.inline-scripts')
         <script>
             // Smooth-scroll for in-page anchors and defensive clickability helpers
             document.addEventListener('click', function (e) {

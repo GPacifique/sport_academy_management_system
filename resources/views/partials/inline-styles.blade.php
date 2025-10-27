@@ -1,4 +1,21 @@
 <style>
-/* Inline CSS injected for all pages (no external assets required) */
-<?php echo file_get_contents(public_path('css/inline-styles.css')); ?>
+    body {
+        background-color: #f8f9fa;
+        color: #343a40;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .btn-custom {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 4px;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+    .btn-custom:hover {
+        background-color: #0056b3;
+        color: #fff;
+    }       
+    
 </style>
