@@ -271,3 +271,4 @@ This project is open-sourced software licensed under the [MIT license](https://o
 <p align="center">Made with ❤️ by Gashumba | Sport Academy MS v1.0.0</p>
 
 # sport_academy_management_system
+# sport_academy_management_system
