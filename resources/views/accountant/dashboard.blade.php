@@ -100,20 +100,80 @@
 
         <!-- Expenses and Profit -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
-                <div class="text-xs text-slate-500">Expenses This Month</div>
-                <div class="mt-2 text-2xl font-bold text-slate-900">{{ number_format(($totalExpensesThisMonth ?? 0)/100, 2) }} RWF</div>
-                <div class="text-xs text-slate-400 mt-1">Monthly costs</div>
+            <div class="card">
+                <div class="card-body p-5">
+                    <div class="text-xs text-slate-500">Expenses This Month</div>
+                    <div class="mt-2 text-2xl font-bold text-slate-900">{{ number_format(($totalExpensesThisMonth ?? 0)/100, 2) }} RWF</div>
+                    <div class="text-xs text-slate-400 mt-1">Monthly costs</div>
+                </div>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
-                <div class="text-xs text-slate-500">Pending Expenses</div>
-                <div class="mt-2 text-2xl font-bold text-slate-900">{{ $pendingExpenses ?? 0 }}</div>
-                <div class="text-xs text-slate-400 mt-1">Awaiting approval</div>
+            <div class="card">
+                <div class="card-body p-5">
+                    <div class="text-xs text-slate-500">Pending Expenses</div>
+                    <div class="mt-2 text-2xl font-bold text-slate-900">{{ $pendingExpenses ?? 0 }}</div>
+                    <div class="text-xs text-slate-400 mt-1">Awaiting approval</div>
+                </div>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
-                <div class="text-xs text-slate-500">Net Profit (Month)</div>
-                <div class="mt-2 text-2xl font-bold text-slate-900">{{ number_format(($netProfitThisMonth ?? 0)/100, 2) }} RWF</div>
-                <div class="text-xs text-slate-400 mt-1">Revenue minus expenses</div>
+            <div class="card">
+                <div class="card-body p-5">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-xs text-slate-500">Net Profit (Month)</div>
+                            <div class="mt-2 text-2xl font-bold {{ $netProfitColor === 'green' ? 'text-emerald-600' : 'text-rose-600' }}">
+                                {{ number_format(($netProfitThisMonth ?? 0)/100, 2) }} RWF
+                            </div>
+                            <div class="text-xs text-slate-400 mt-1">Revenue minus expenses</div>
+                        </div>
+                        <div class="text-2xl">
+                            @if($netProfitThisMonth >= 0) 📈 @else 📉 @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Insights Section -->
+        <div>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">💹 Financial Insights</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Payment Method Breakdown -->
+                <div class="card">
+                    <div class="card-body p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">💳 Payment Methods (This Month)</h3>
+                        <canvas id="paymentMethodChart" class="card-chart card-chart--large"></canvas>
+                    </div>
+                </div>
+
+                <!-- Expense Categories Breakdown -->
+                <div class="card">
+                    <div class="card-body p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">💰 Expense Categories (This Month)</h3>
+                        <canvas id="expenseCategoriesChart" class="card-chart card-chart--large"></canvas>
+                    </div>
+                </div>
+
+                <!-- Month-over-Month Comparison -->
+                <div class="card">
+                    <div class="card-body p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">📊 Month-over-Month</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                <div class="text-xs text-slate-500 font-semibold">Last Month Revenue</div>
+                                <div class="mt-1 text-lg font-bold text-slate-900">{{ number_format(($lastMonthRevenue ?? 0)/100, 2) }} RWF</div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                <div class="text-xs text-slate-500 font-semibold">This Month Revenue</div>
+                                <div class="mt-1 text-lg font-bold text-slate-900">{{ number_format(($totalRevenueCents ?? 0)/100, 2) }} RWF</div>
+                            </div>
+                            <div class="p-4 {{ $revenueChangeDirection === 'up' ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200' }} rounded-lg border">
+                                <div class="text-xs text-slate-500 font-semibold">Change</div>
+                                <div class="mt-1 text-lg font-bold {{ $revenueChangeDirection === 'up' ? 'text-emerald-600' : 'text-rose-600' }}">
+                                    {{ $revenueChangeDirection === 'up' ? '↗' : '↘' }} {{ abs($revenueChange ?? 0) }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -220,6 +280,52 @@
                 });
             }
 
+            function renderPaymentMethodChart(ctx, data) {
+                const labels = Object.keys(data);
+                const values = Object.values(data).map(v => v / 100);
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: values,
+                            backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
+                            tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.parsed.toFixed(2)} RWF` } }
+                        }
+                    }
+                });
+            }
+
+            function renderExpenseCategoriesChart(ctx, data) {
+                const labels = Object.keys(data);
+                const values = Object.values(data).map(v => v / 100);
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: values,
+                            backgroundColor: ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
+                            tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.parsed.toFixed(2)} RWF` } }
+                        }
+                    }
+                });
+            }
+
             document.addEventListener('DOMContentLoaded', async function(){
                 const metrics = await fetchMetrics();
                 if (!metrics) return;
@@ -236,6 +342,20 @@
                     const labels = Object.keys(metrics.agingBuckets);
                     const values = Object.values(metrics.agingBuckets);
                     renderAgingChart(agingCtx, labels, values);
+                }
+
+                // Payment method breakdown
+                const paymentMethodCtx = document.getElementById('paymentMethodChart');
+                if (paymentMethodCtx) {
+                    const methodData = @json($paymentMethodBreakdown ?? []);
+                    renderPaymentMethodChart(paymentMethodCtx, methodData);
+                }
+
+                // Expense categories breakdown
+                const expenseCategoriesCtx = document.getElementById('expenseCategoriesChart');
+                if (expenseCategoriesCtx) {
+                    const categoryData = @json($expenseCategories ?? []);
+                    renderExpenseCategoriesChart(expenseCategoriesCtx, categoryData);
                 }
             });
         })();

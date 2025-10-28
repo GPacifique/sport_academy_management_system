@@ -218,39 +218,96 @@
         <!-- Analytics & Insights Section (polished layout) -->
         <div>
             <h2 class="text-xl font-bold text-slate-900 mb-4">📈 Analytics & Insights</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="md:col-span-2 bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-300 rounded-xl p-6">
-                    <h3 class="font-bold text-slate-900 mb-4">🎯 Performance Metrics</h3>
-                    <div class="space-y-4">
-                        @foreach([['Student Enrollment Rate', 'bg-gradient-to-r from-blue-500 to-blue-600', '75%'], ['Session Attendance', 'bg-gradient-to-r from-emerald-500 to-emerald-600','83%'], ['Revenue Target','bg-gradient-to-r from-amber-500 to-amber-600','66%'], ['Equipment Status','bg-gradient-to-r from-green-500 to-green-600','80%']] as $m)
-                            <div class="flex items-center justify-between">
-                                <span class="text-slate-700">{{ $m[0] }}</span>
-                                <div class="w-3/12 h-2 bg-slate-200 rounded-full overflow-hidden">
-                                    <div class="h-full {{ $m[1] }}" style="width: {{ $m[2] }}"></div>
-                                </div>
-                            </div>
-                        @endforeach
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Trends Chart (Sessions over last 8 weeks) -->
+                <div class="lg:col-span-2 card">
+                    <div class="card-body p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">📊 Weekly Session Trends (Last 8 Weeks)</h3>
+                        <canvas id="sessionTrendsChart" class="card-chart card-chart--large"></canvas>
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-300 rounded-xl p-6">
-                    <h3 class="font-bold text-indigo-900 mb-4">⚙️ System Health</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
-                            <span class="text-xl">✅</span>
-                            <span class="text-sm font-semibold text-emerald-900">Database: Optimal</span>
+                <!-- Coach Workload (Top 5 Coaches) -->
+                <div class="card">
+                    <div class="card-body p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">👨‍🏫 Coach Workload (This Month)</h3>
+                        <canvas id="coachWorkloadChart" class="card-chart card-chart--large"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equipment & System Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-slate-500 font-semibold">Equipment Utilization</div>
+                        <div class="mt-2 text-2xl font-bold text-slate-900">{{ $equipmentUtilization ?? 0 }}%</div>
+                        <div class="text-xs text-slate-400 mt-1">Assets in use</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-slate-500 font-semibold">Net Profit (Month)</div>
+                        <div class="mt-2 text-2xl font-bold {{ ($netProfit ?? 0) >= 0 ? 'text-emerald-600' : 'text-rose-600' }}">
+                            {{ number_format(($netProfit ?? 0)/100, 2) }} RWF
                         </div>
-                        <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
-                            <span class="text-xl">✅</span>
-                            <span class="text-sm font-semibold text-emerald-900">API Endpoints: Responsive</span>
+                        <div class="text-xs text-slate-400 mt-1">Revenue minus expenses</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-slate-500 font-semibold">Groups / Coaches</div>
+                        <div class="mt-2 text-2xl font-bold text-slate-900">{{ $stats['totalGroups'] ?? 0 }} / {{ $stats['coachUsers'] ?? 0 }}</div>
+                        <div class="text-xs text-slate-400 mt-1">Active groupings</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-slate-500 font-semibold">Sessions This Week</div>
+                        <div class="mt-2 text-2xl font-bold text-slate-900">{{ $stats['sessionsThisWeek'] ?? 0 }}</div>
+                        <div class="text-xs text-slate-400 mt-1">Scheduled</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Health -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <div class="card">
+                    <div class="card-body p-6">
+                        <h3 class="font-bold text-indigo-900 mb-4">⚙️ System Health</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
+                                <span class="text-xl">✅</span>
+                                <span class="text-sm font-semibold text-emerald-900">Database: Optimal</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
+                                <span class="text-xl">✅</span>
+                                <span class="text-sm font-semibold text-emerald-900">API Endpoints: Responsive</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
+                                <span class="text-xl">✅</span>
+                                <span class="text-sm font-semibold text-emerald-900">File Storage: Adequate</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-amber-50 border border-amber-300 rounded-lg">
+                                <span class="text-xl">⚠️</span>
+                                <span class="text-sm font-semibold text-amber-900">Backup: Last 2 hours ago</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
-                            <span class="text-xl">✅</span>
-                            <span class="text-sm font-semibold text-emerald-900">File Storage: Adequate</span>
-                        </div>
-                        <div class="flex items-center gap-3 p-3 bg-amber-50 border border-amber-300 rounded-lg">
-                            <span class="text-xl">⚠️</span>
-                            <span class="text-sm font-semibold text-amber-900">Backup: Last 2 hours ago</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 card">
+                    <div class="card-body p-6">
+                        <h3 class="font-bold text-slate-900 mb-4">🎯 Performance Metrics</h3>
+                        <div class="space-y-4">
+                            @foreach([['Student Enrollment Rate', 'bg-gradient-to-r from-blue-500 to-blue-600', '75%'], ['Session Attendance', 'bg-gradient-to-r from-emerald-500 to-emerald-600','83%'], ['Revenue Target','bg-gradient-to-r from-amber-500 to-amber-600','66%'], ['Equipment Status','bg-gradient-to-r from-green-500 to-green-600','80%']] as $m)
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-700">{{ $m[0] }}</span>
+                                    <div class="w-3/12 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                        <div class="h-full {{ $m[1] }}" style="width: {{ $m[2] }}"></div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -258,3 +315,74 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        (function(){
+            // Session trends chart (last 8 weeks)
+            const trendsCtx = document.getElementById('sessionTrendsChart');
+            if (trendsCtx) {
+                const trendsData = @json($weeklyTrends ?? []);
+                const labels = trendsData.map(t => t.label);
+                const data = trendsData.map(t => t.sessions);
+                new Chart(trendsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Sessions',
+                            data: data,
+                            borderColor: '#4f46e5',
+                            backgroundColor: 'rgba(79,70,229,0.1)',
+                            fill: true,
+                            tension: 0.3,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#4f46e5',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { mode: 'index', intersect: false }
+                        },
+                        scales: {
+                            x: { grid: { display: false } },
+                            y: { beginAtZero: true, ticks: { precision: 0 } }
+                        }
+                    }
+                });
+            }
+
+            // Coach workload bar chart
+            const coachCtx = document.getElementById('coachWorkloadChart');
+            if (coachCtx) {
+                const workloadData = @json($coachWorkload ?? []);
+                const coaches = workloadData.map(c => c.coach);
+                const sessions = workloadData.map(c => c.sessions);
+                new Chart(coachCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: coaches,
+                        datasets: [{
+                            label: 'Sessions',
+                            data: sessions,
+                            backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { grid: { display: false } },
+                            y: { beginAtZero: true, ticks: { precision: 0 } }
+                        }
+                    }
+                });
+            }
+        })();
+    </script>
+@endpush

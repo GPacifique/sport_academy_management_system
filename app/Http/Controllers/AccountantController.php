@@ -49,6 +49,31 @@ class AccountantController extends Controller
         $netProfitThisMonth = $totalRevenueCents - $totalExpensesThisMonth;
         $netProfitColor = $netProfitThisMonth >= 0 ? 'green' : 'rose';
 
+        // Payment method breakdown (this month)
+        $paymentMethodBreakdown = Payment::selectRaw('method, SUM(amount_cents) as total')
+            ->where('status', 'succeeded')
+            ->whereBetween('paid_at', [$startOfMonth, $endOfMonth])
+            ->groupBy('method')
+            ->get()
+            ->mapWithKeys(fn($item) => [ucfirst(str_replace('_', ' ', $item->method)) => (int)$item->total]);
+
+        // Month-over-month comparison (this vs last month revenue)
+        $lastMonthStart = $now->copy()->subMonth()->startOfMonth();
+        $lastMonthEnd = $now->copy()->subMonth()->endOfMonth();
+        $lastMonthRevenue = Payment::where('status', 'succeeded')
+            ->whereBetween('paid_at', [$lastMonthStart, $lastMonthEnd])
+            ->sum('amount_cents');
+        $revenueChange = $lastMonthRevenue > 0 ? round((($totalRevenueCents - $lastMonthRevenue) / $lastMonthRevenue) * 100, 1) : 0;
+        $revenueChangeDirection = $totalRevenueCents >= $lastMonthRevenue ? 'up' : 'down';
+
+        // Expense categories breakdown (this month)
+        $expenseCategories = Expense::selectRaw('category, SUM(amount_cents) as total')
+            ->whereIn('status', ['approved', 'paid'])
+            ->whereBetween('expense_date', [$startOfMonth, $endOfMonth])
+            ->groupBy('category')
+            ->get()
+            ->mapWithKeys(fn($item) => [ucfirst($item->category ?? 'Other') => (int)$item->total]);
+
         // Fetch recent payments
         $recentPayments = Payment::with(['student', 'subscription.plan', 'invoice'])
             ->where('status', 'succeeded')
@@ -70,6 +95,11 @@ class AccountantController extends Controller
             'totalExpensesThisMonth' => $totalExpensesThisMonth,
             'netProfitThisMonth' => $netProfitThisMonth,
             'netProfitColor' => $netProfitColor,
+            'paymentMethodBreakdown' => $paymentMethodBreakdown,
+            'lastMonthRevenue' => $lastMonthRevenue,
+            'revenueChange' => $revenueChange,
+            'revenueChangeDirection' => $revenueChangeDirection,
+            'expenseCategories' => $expenseCategories,
         ]);
     }
 
