@@ -166,6 +166,8 @@ Route::middleware(['auth', 'role:coach|admin|super-admin'])->prefix('coach')->gr
 
 Route::middleware(['auth', 'role:accountant|admin|super-admin'])->prefix('accountant')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\AccountantController::class, 'index'])->name('accountant.dashboard');
+    // Dashboard metrics endpoint for charts
+    Route::get('/dashboard/metrics', [\App\Http\Controllers\AccountantController::class, 'metrics'])->name('accountant.dashboard.metrics');
 
     // Subscriptions
     Route::get('/subscriptions', [\App\Http\Controllers\Accountant\SubscriptionsController::class, 'index'])->name('accountant.subscriptions.index');

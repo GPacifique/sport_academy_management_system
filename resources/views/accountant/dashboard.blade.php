@@ -35,7 +35,9 @@
                         </div>
                         <div class="text-3xl">💰</div>
                     </div>
-                    <div class="mt-4 h-24 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400">[Revenue sparkline placeholder]</div>
+                    <div class="mt-4">
+                        <canvas id="revenueSparkline" height="72" style="width:100%;"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -49,7 +51,9 @@
                         </div>
                         <div class="text-3xl">📊</div>
                     </div>
-                    <div class="mt-4 h-24 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400">[Aging buckets placeholder]</div>
+                    <div class="mt-4">
+                        <canvas id="agingChart" height="72" style="width:100%;"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -173,3 +177,59 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <!-- Chart.js CDN (small, only for sparklines) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        (function(){
+            const metricsUrl = "{{ route('accountant.dashboard.metrics') }}";
+
+            async function fetchMetrics() {
+                try {
+                    const res = await fetch(metricsUrl, { credentials: 'same-origin' });
+                    if (!res.ok) throw new Error('Failed to load metrics');
+                    return await res.json();
+                } catch (err) {
+                    console.error('Metrics error', err);
+                    return null;
+                }
+            }
+
+            function renderRevenueSparkline(ctx, labels, data) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: labels, datasets: [{ data: data.map(v => (v/100)), borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.08)', fill: true, tension: 0.3, pointRadius: 0 }]},
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } }, elements: { line: { borderWidth: 2 } } }
+                });
+            }
+
+            function renderAgingChart(ctx, labels, data) {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: { labels: labels, datasets: [{ data: data.map(v => (v/100)), backgroundColor: ['#60a5fa','#f59e0b','#fb7185','#ef4444','#8b5cf6'] }]},
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { display: false } } }
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', async function(){
+                const metrics = await fetchMetrics();
+                if (!metrics) return;
+
+                // Revenue sparkline
+                const revCtx = document.getElementById('revenueSparkline');
+                if (revCtx && metrics.monthlyRevenue) {
+                    renderRevenueSparkline(revCtx, metrics.monthlyRevenue.labels, metrics.monthlyRevenue.data);
+                }
+
+                // Aging chart
+                const agingCtx = document.getElementById('agingChart');
+                if (agingCtx && metrics.agingBuckets) {
+                    const labels = Object.keys(metrics.agingBuckets);
+                    const values = Object.values(metrics.agingBuckets);
+                    renderAgingChart(agingCtx, labels, values);
+                }
+            });
+        })();
+    </script>
+@endpush

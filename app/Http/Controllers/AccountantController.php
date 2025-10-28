@@ -72,4 +72,74 @@ class AccountantController extends Controller
             'netProfitColor' => $netProfitColor,
         ]);
     }
+
+    /**
+     * Return JSON metrics for dashboard charts.
+     * - monthlyRevenue: labels (month) and data (amount in cents)
+     * - agingBuckets: associative array of bucket => amount_cents
+     */
+    public function metrics(Request $request)
+    {
+        $now = now();
+        $months = [];
+        $labels = [];
+        $data = [];
+
+        // last 12 months
+        for ($i = 11; $i >= 0; $i--) {
+            $start = $now->copy()->subMonths($i)->startOfMonth();
+            $end = $now->copy()->subMonths($i)->endOfMonth();
+            $label = $start->format('M Y');
+            $months[] = [$start, $end];
+            $labels[] = $label;
+            $sum = \App\Models\Payment::where('status', 'succeeded')
+                ->whereBetween('paid_at', [$start, $end])
+                ->sum('amount_cents');
+            $data[] = (int) $sum;
+        }
+
+        // Aging buckets based on invoice due_date and outstanding balance
+        $today = now()->startOfDay();
+        $buckets = [
+            'current' => 0,
+            '1-30' => 0,
+            '31-60' => 0,
+            '61-90' => 0,
+            '90+' => 0,
+        ];
+
+        $invoices = \App\Models\Invoice::select('id', 'amount_cents', 'due_date', 'status')
+            ->whereIn('status', ['pending','overdue'])
+            ->get();
+
+        foreach ($invoices as $inv) {
+            $balance = $inv->outstanding_balance ?? ($inv->amount_cents ?? 0);
+            $due = $inv->due_date ? \Illuminate\Support\Carbon::parse($inv->due_date)->startOfDay() : null;
+            if (!$due) {
+                $buckets['current'] += (int) $balance;
+                continue;
+            }
+            $days = $due->diffInDays($today, false); // positive if due in past
+            if ($days <= 0) {
+                // not yet due or due today
+                $buckets['current'] += (int) $balance;
+            } elseif ($days <= 30) {
+                $buckets['1-30'] += (int) $balance;
+            } elseif ($days <= 60) {
+                $buckets['31-60'] += (int) $balance;
+            } elseif ($days <= 90) {
+                $buckets['61-90'] += (int) $balance;
+            } else {
+                $buckets['90+'] += (int) $balance;
+            }
+        }
+
+        return response()->json([
+            'monthlyRevenue' => [
+                'labels' => $labels,
+                'data' => $data,
+            ],
+            'agingBuckets' => $buckets,
+        ]);
+    }
 }
