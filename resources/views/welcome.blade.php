@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Modern Sport Club Management System - Manage members, coaches, schedules, attendance, and billing in one platform.">
-    <title>{{ config('app.name', 'Sport Club MS') }} - Modern Club Management Platform</title>
+    <title>{{ config('app.name', 'Sport Academy MS') }} - Modern Academy Management Platform</title>
 
     <!-- Preconnect to font service for faster load -->
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
@@ -53,10 +53,10 @@
         <div class="container">
             <div class="hero-content">
                 <h1 role="heading" aria-level="1">
-                    All‑in‑One<br><span class="gradient-text">Sport Club Management</span>
+                    All‑in‑One<br><span class="gradient-text">Sport Academy Management System</span>
                 </h1>
                 <p class="hero-subtitle" role="doc-subtitle">
-                    Manage members, coaches, schedules, attendance, payments, and reports in one secure, easy-to-use platform.
+                    Manage Students, coaches, schedules, attendance, payments, and reports in one secure, easy-to-use platform.
                 </p>
                 <div class="hero-buttons" role="group" aria-label="Primary actions">
                     <a href="{{ route('register') }}" class="btn btn-primary btn-lg" role="button">Get Started</a>
@@ -78,7 +78,7 @@
                 <!-- Members -->
                 <article class="module-card" role="listitem" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);" aria-label="Member Management module">
                     <div class="module-icon" aria-hidden="true">👤</div>
-                    <h3 class="module-title" role="heading" aria-level="3">Member Management</h3>
+                    <h3 class="module-title" role="heading" aria-level="3">Students Management</h3>
                     <p class="module-desc">Profiles, roles, memberships, and communication in one place</p>
                     <ul class="module-features" aria-label="Features of Member Management">
                         <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg> Members & Coaches</li>
@@ -245,8 +245,8 @@
                 <h3 role="heading" aria-level="3" id="footer-contact">Contact</h3>
                 <address style="font-style: normal;">
                     <ul class="footer-links" role="list">
-                        <li role="listitem"><a href="mailto:info@sportacademyms.com">📧 info@sportacademyms.com</a></li>
-                        <li role="listitem"><a href="tel:+250XXX XXX XXX">📞 +250 XXX XXX XXX</a></li>
+                        <li role="listitem"><a href="mailto:info@sportacademyms.com">📧 info@sportacademyms.app.com</a></li>
+                        <li role="listitem"><a href="tel:+250786163963">📞 +250 786 163 963</a></li>
                         <li role="listitem">📍 Kigali, Rwanda</li>
                     </ul>
                 </address>
@@ -254,7 +254,7 @@
         </div>
 
         <div class="footer-divider">
-            <p>&copy; {{ date('Y') }} Sport Club MS. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} Sport Academy MS. All rights reserved.</p>
         </div>
     </footer>
 
