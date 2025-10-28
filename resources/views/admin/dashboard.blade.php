@@ -71,54 +71,62 @@
         <div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <a href="{{ route('admin.users.index') }}" class="block">
-                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <div class="text-xs text-slate-500 font-semibold">Total Users</div>
+                    <div class="card">
+                        <div class="card-body p-6">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="text-xs text-slate-500 font-semibold">Total Users</div>
                                     <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['totalUsers'] ?? 0 }}</div>
+                                </div>
+                                <div class="text-3xl">👥</div>
                             </div>
-                            <div class="text-3xl">👥</div>
+                            <div class="mt-3 text-sm text-slate-500">Active accounts across the system</div>
                         </div>
-                        <div class="mt-3 text-sm text-slate-500">Active accounts across the system</div>
                     </div>
                 </a>
 
                 <a href="#" class="block">
-                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <div class="text-xs text-slate-500 font-semibold">Branches</div>
+                    <div class="card">
+                        <div class="card-body p-6">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="text-xs text-slate-500 font-semibold">Branches</div>
                                     <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['totalBranches'] ?? 0 }}</div>
+                                </div>
+                                <div class="text-3xl">🏢</div>
                             </div>
-                            <div class="text-3xl">🏢</div>
+                            <div class="mt-3 text-sm text-slate-500">Active branch locations</div>
                         </div>
-                        <div class="mt-3 text-sm text-slate-500">Active branch locations</div>
                     </div>
                 </a>
 
                 <a href="{{ route('admin.students.index') }}" class="block">
-                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <div class="text-xs text-slate-500 font-semibold">Active Students</div>
+                    <div class="card">
+                        <div class="card-body p-6">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="text-xs text-slate-500 font-semibold">Active Students</div>
                                     <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['activeStudents'] ?? 0 }}</div>
+                                </div>
+                                <div class="text-3xl">🎓</div>
                             </div>
-                            <div class="text-3xl">🎓</div>
+                            <div class="mt-3 text-sm text-slate-500">Currently enrolled</div>
                         </div>
-                        <div class="mt-3 text-sm text-slate-500">Currently enrolled</div>
                     </div>
                 </a>
 
                 <a href="{{ route('admin.sessions.index') }}" class="block">
-                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <div class="text-xs text-slate-500 font-semibold">Sessions ({{ $rangeLabel ?? 'Today' }})</div>
+                    <div class="card">
+                        <div class="card-body p-6">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="text-xs text-slate-500 font-semibold">Sessions ({{ $rangeLabel ?? 'Today' }})</div>
                                     <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['todaySessions'] ?? 0 }}</div>
+                                </div>
+                                <div class="text-3xl">📅</div>
                             </div>
-                            <div class="text-3xl">📅</div>
+                            <div class="mt-3 text-sm text-slate-500">Scheduled sessions</div>
                         </div>
-                        <div class="mt-3 text-sm text-slate-500">Scheduled sessions</div>
                     </div>
                 </a>
             </div>
@@ -127,34 +135,42 @@
         <!-- Revenue / Subscriptions Row simplified -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <a href="{{ route('accountant.subscriptions.index') }}" class="block">
-                <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border border-green-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-xs text-green-700 font-semibold">Active Subscriptions</div>
-                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ $stats['activeSubscriptions'] ?? 0 }}</div>
-                    <div class="text-xs text-slate-500 mt-1">of {{ $stats['totalSubscriptions'] ?? 0 }} total</div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-green-700 font-semibold">Active Subscriptions</div>
+                        <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ $stats['activeSubscriptions'] ?? 0 }}</div>
+                        <div class="text-xs text-slate-500 mt-1">of {{ $stats['totalSubscriptions'] ?? 0 }} total</div>
+                    </div>
                 </div>
             </a>
 
             <a href="{{ route('accountant.payments.index') }}" class="block">
-                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-5 rounded-xl border border-emerald-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-xs text-emerald-700 font-semibold">Revenue This Month</div>
-                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ number_format($stats['revenueThisMonth'] ?? 0) }} Rwf</div>
-                    <div class="text-xs text-slate-500 mt-1">Monthly income</div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-emerald-700 font-semibold">Revenue This Month</div>
+                        <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ number_format($stats['revenueThisMonth'] ?? 0) }} Rwf</div>
+                        <div class="text-xs text-slate-500 mt-1">Monthly income</div>
+                    </div>
                 </div>
             </a>
 
             <a href="{{ route('accountant.invoices.index') }}" class="block">
-                <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-5 rounded-xl border border-amber-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-xs text-amber-700 font-semibold">Pending Invoices</div>
-                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ $stats['pendingInvoices'] ?? 0 }}</div>
-                    <div class="text-xs text-slate-500 mt-1">Awaiting payment</div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-amber-700 font-semibold">Pending Invoices</div>
+                        <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ $stats['pendingInvoices'] ?? 0 }}</div>
+                        <div class="text-xs text-slate-500 mt-1">Awaiting payment</div>
+                    </div>
                 </div>
             </a>
 
             <a href="{{ route('accountant.payments.index') }}" class="block">
-                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-5 rounded-xl border border-indigo-200 shadow-sm hover:shadow-md transition">
-                    <div class="text-xs text-indigo-700 font-semibold">Total Revenue</div>
-                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ number_format($stats['totalRevenue'] ?? 0) }} Rwf</div>
-                    <div class="text-xs text-slate-500 mt-1">All-time earnings</div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-indigo-700 font-semibold">Total Revenue</div>
+                        <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ number_format($stats['totalRevenue'] ?? 0) }} Rwf</div>
+                        <div class="text-xs text-slate-500 mt-1">All-time earnings</div>
+                    </div>
                 </div>
             </a>
         </div>

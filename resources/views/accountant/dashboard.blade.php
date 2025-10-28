@@ -26,47 +26,55 @@
         <!-- KPI Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div class="lg:col-span-2">
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 h-full">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <div class="text-xs text-slate-500 font-semibold">Revenue — This Month</div>
-                            <div class="mt-2 text-2xl font-bold text-slate-900">{{ number_format(($totalRevenueCents ?? 0)/100, 2) }} RWF</div>
-                            <div class="text-xs text-slate-400 mt-1">{{ now()->format('M Y') }}</div>
+                <div class="card h-full">
+                    <div class="card-body p-5">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <div class="text-xs text-slate-500 font-semibold">Revenue — This Month</div>
+                                <div class="mt-2 text-2xl font-bold text-slate-900">{{ number_format(($totalRevenueCents ?? 0)/100, 2) }} RWF</div>
+                                <div class="text-xs text-slate-400 mt-1">{{ now()->format('M Y') }}</div>
+                            </div>
+                            <div class="text-3xl">💰</div>
                         </div>
-                        <div class="text-3xl">💰</div>
-                    </div>
-                    <div class="mt-4">
-                        <canvas id="revenueSparkline" height="72" style="width:100%;"></canvas>
+                        <div class="mt-4">
+                            <canvas id="revenueSparkline" class="card-chart" height="72"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="lg:col-span-2">
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 h-full">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <div class="text-xs text-slate-500 font-semibold">Outstanding Balance</div>
-                            <div class="mt-2 text-2xl font-bold text-slate-900">{{ number_format(($outstandingCents ?? 0)/100, 2) }} RWF</div>
-                            <div class="text-xs text-slate-400 mt-1">Pending + Overdue</div>
+                <div class="card h-full">
+                    <div class="card-body p-5">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <div class="text-xs text-slate-500 font-semibold">Outstanding Balance</div>
+                                <div class="mt-2 text-2xl font-bold text-slate-900">{{ number_format(($outstandingCents ?? 0)/100, 2) }} RWF</div>
+                                <div class="text-xs text-slate-400 mt-1">Pending + Overdue</div>
+                            </div>
+                            <div class="text-3xl">📊</div>
                         </div>
-                        <div class="text-3xl">📊</div>
-                    </div>
-                    <div class="mt-4">
-                        <canvas id="agingChart" height="72" style="width:100%;"></canvas>
+                        <div class="mt-4">
+                            <canvas id="agingChart" class="card-chart" height="72"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="lg:col-span-2 grid grid-cols-2 gap-4">
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
-                    <div class="text-xs text-slate-500">Pending Invoices</div>
-                    <div class="mt-2 text-xl font-bold text-slate-900">{{ $pendingInvoices ?? 0 }}</div>
-                    <div class="text-xs text-slate-400 mt-1">Awaiting payment</div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-slate-500">Pending Invoices</div>
+                        <div class="mt-2 text-xl font-bold text-slate-900">{{ $pendingInvoices ?? 0 }}</div>
+                        <div class="text-xs text-slate-400 mt-1">Awaiting payment</div>
+                    </div>
                 </div>
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
-                    <div class="text-xs text-slate-500">Overdue Invoices</div>
-                    <div class="mt-2 text-xl font-bold text-slate-900">{{ $overdueInvoices ?? 0 }}</div>
-                    <div class="text-xs text-slate-400 mt-1">Past due</div>
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="text-xs text-slate-500">Overdue Invoices</div>
+                        <div class="mt-2 text-xl font-bold text-slate-900">{{ $overdueInvoices ?? 0 }}</div>
+                        <div class="text-xs text-slate-400 mt-1">Past due</div>
+                    </div>
                 </div>
             </div>
         </div>
