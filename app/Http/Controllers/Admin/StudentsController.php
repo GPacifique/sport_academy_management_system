@@ -15,12 +15,25 @@ class StudentsController extends Controller
 {
     public function index(Request $request)
     {
+        $q = trim((string) $request->get('q'));
+        
         $students = Student::with(['branch', 'group', 'parent'])
+            ->when($q !== '', function ($query) use ($q) {
+                $query->where(function ($sub) use ($q) {
+                    $sub->where('first_name', 'like', "%$q%")
+                        ->orWhere('second_name', 'like', "%$q%")
+                        ->orWhere('email', 'like', "%$q%")
+                        ->orWhere('phone', 'like', "%$q%")
+                        ->orWhere('jersey_number', 'like', "%$q%")
+                        ->orWhere('jersey_name', 'like', "%$q%");
+                });
+            })
             ->orderBy('first_name')
+            ->orderBy('second_name')
             ->paginate(15)
             ->appends($request->query());
 
-        return view('admin.students.index', compact('students'));
+        return view('admin.students.index', compact('students', 'q'));
     }
 
     public function show(Student $student)
