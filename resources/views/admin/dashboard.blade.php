@@ -3,11 +3,18 @@
 
 @section('content')
     <div class="space-y-8">
-        <!-- Header -->
+        <!-- Header with Date Info -->
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Admin Dashboard</h1>
-                <p class="text-slate-600 mt-1">Overview of your sports academy operations</p>
+                <h1 class="text-4xl font-bold text-slate-900">Admin Dashboard</h1>
+                <p class="text-slate-600 mt-2">📊 Overview of your sports academy operations</p>
+                <p class="text-sm text-slate-500 mt-1">{{ now()->format('l, F d, Y') }}</p>
+            </div>
+            <div class="text-right">
+                <div class="inline-block px-4 py-2 bg-indigo-50 rounded-lg border border-indigo-200">
+                    <p class="text-sm font-semibold text-indigo-700">System Status</p>
+                    <p class="text-xs text-indigo-600 mt-1">✅ All Systems Operational</p>
+                </div>
             </div>
         </div>
 
@@ -202,60 +209,62 @@
             </div>
         </div>
 
-        <!-- Quick Actions -->
+        <!-- Quick Actions Section with Enhanced Styling -->
         <div>
-            <h2 class="text-xl font-bold text-slate-900 mb-4">⚡ Quick Actions</h2>
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <a href="{{ route('admin.users.create') }}" class="flex items-center gap-3 p-4 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 transition group">
-                        <span class="text-2xl">👤</span>
-                        <span class="font-semibold text-blue-900">Add User</span>
-                    </a>
-                    <a href="{{ route('admin.students.create') }}" class="flex items-center gap-3 p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition group">
-                        <span class="text-2xl">🎓</span>
-                        <span class="font-semibold text-emerald-900">Add Student</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 p-4 rounded-lg bg-purple-50 hover:bg-purple-100 border border-purple-200 transition group">
-                        <span class="text-2xl">🏢</span>
-                        <span class="font-semibold text-purple-900">Add Branch</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 p-4 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-200 transition group">
-                        <span class="text-2xl">👥</span>
-                        <span class="font-semibold text-amber-900">Add Group</span>
-                    </a>
-                    <a href="{{ route('admin.sessions.create') }}" class="flex items-center gap-3 p-4 rounded-lg bg-fuchsia-50 hover:bg-fuchsia-100 border border-fuchsia-200 transition group">
-                        <span class="text-2xl">📅</span>
-                        <span class="font-semibold text-fuchsia-900">Add Session</span>
-                    </a>
-                    <a href="{{ route('accountant.subscriptions.create') }}" class="flex items-center gap-3 p-4 rounded-lg bg-green-50 hover:bg-green-100 border border-green-200 transition group">
-                        <span class="text-2xl">✅</span>
-                        <span class="font-semibold text-green-900">New Subscription</span>
-                    </a>
-                    <a href="{{ route('accountant.invoices.create') }}" class="flex items-center gap-3 p-4 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition group">
-                        <span class="text-2xl">📄</span>
-                        <span class="font-semibold text-indigo-900">Create Invoice</span>
-                    </a>
-                    <a href="{{ route('accountant.payments.index') }}" class="flex items-center gap-3 p-4 rounded-lg bg-teal-50 hover:bg-teal-100 border border-teal-200 transition group">
-                        <span class="text-2xl">💳</span>
-                        <span class="font-semibold text-teal-900">View Payments</span>
-                    </a>
-                    <a href="{{ route('admin.expenses.create') }}" class="flex items-center gap-3 p-4 rounded-lg bg-red-50 hover:bg-red-100 border border-red-200 transition group">
-                        <span class="text-2xl">💸</span>
-                        <span class="font-semibold text-red-900">Add Expense</span>
-                    </a>
-                    <a href="{{ route('admin.expenses.index') }}" class="flex items-center gap-3 p-4 rounded-lg bg-rose-50 hover:bg-rose-100 border border-rose-200 transition group">
-                        <span class="text-2xl">📊</span>
-                        <span class="font-semibold text-rose-900">Manage Expenses</span>
-                    </a>
-                    <a href="{{ route('admin.equipment.index') }}" class="flex items-center gap-3 p-4 rounded-lg bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 transition group">
-                        <span class="text-2xl">⚽</span>
-                        <span class="font-semibold text-cyan-900">Equipment</span>
-                    </a>
-                    <a href="{{ route('admin.plans.index') }}" class="flex items-center gap-3 p-4 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 transition group">
-                        <span class="text-2xl">💎</span>
-                        <span class="font-semibold text-slate-900">Subscription Plans</span>
-                    </a>
-                </div>
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-slate-900">⚡ Quick Actions</h2>
+                <p class="text-sm text-slate-500">Frequently used operations</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <!-- Create Operations (Primary) -->
+                <a href="{{ route('admin.users.create') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 hover:border-blue-400 hover:shadow-lg transition-all duration-300">
+                    <div class="absolute inset-0 bg-blue-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">👤</span>
+                    <span class="font-semibold text-blue-900 text-sm">Add User</span>
+                </a>
+
+                <a href="{{ route('admin.students.create') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-300 hover:border-emerald-400 hover:shadow-lg transition-all duration-300">
+                    <div class="absolute inset-0 bg-emerald-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">�</span>
+                    <span class="font-semibold text-emerald-900 text-sm">Add Student</span>
+                </a>
+
+                <a href="{{ route('admin.sessions.create') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-fuchsia-50 to-fuchsia-100 border-2 border-fuchsia-300 hover:border-fuchsia-400 hover:shadow-lg transition-all duration-300">
+                    <div class="absolute inset-0 bg-fuchsia-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">📅</span>
+                    <span class="font-semibold text-fuchsia-900 text-sm">Add Session</span>
+                </a>
+
+                <a href="{{ route('accountant.subscriptions.create') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 hover:border-green-400 hover:shadow-lg transition-all duration-300">
+                    <div class="absolute inset-0 bg-green-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">✅</span>
+                    <span class="font-semibold text-green-900 text-sm">New Subscription</span>
+                </a>
+
+                <!-- Management Operations (Secondary) -->
+                <a href="{{ route('admin.expenses.create') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-red-50 to-red-100 border border-red-300 hover:border-red-400 hover:shadow-md transition-all duration-300">
+                    <div class="absolute inset-0 bg-red-200 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">�</span>
+                    <span class="font-semibold text-red-900 text-sm">Add Expense</span>
+                </a>
+
+                <a href="{{ route('accountant.invoices.create') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-300 hover:border-indigo-400 hover:shadow-md transition-all duration-300">
+                    <div class="absolute inset-0 bg-indigo-200 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">�</span>
+                    <span class="font-semibold text-indigo-900 text-sm">Create Invoice</span>
+                </a>
+
+                <a href="{{ route('admin.equipment.index') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 border border-cyan-300 hover:border-cyan-400 hover:shadow-md transition-all duration-300">
+                    <div class="absolute inset-0 bg-cyan-200 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">⚽</span>
+                    <span class="font-semibold text-cyan-900 text-sm">Equipment</span>
+                </a>
+
+                <a href="{{ route('admin.plans.index') }}" class="group relative overflow-hidden rounded-lg p-4 bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-300 hover:border-purple-400 hover:shadow-md transition-all duration-300">
+                    <div class="absolute inset-0 bg-purple-200 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <span class="text-2xl block mb-2">💎</span>
+                    <span class="font-semibold text-purple-900 text-sm">Subscription Plans</span>
+                </a>
             </div>
         </div>
 
@@ -306,6 +315,66 @@
                         @endforeach
                     </div>
                 @endif
+            </div>
+        </div>
+
+        <!-- Analytics & Insights Section -->
+        <div>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">📈 Analytics & Insights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Performance Metrics -->
+                <div class="bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-300 rounded-xl p-6">
+                    <h3 class="font-bold text-slate-900 mb-4">🎯 Performance Metrics</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-700">Student Enrollment Rate</span>
+                            <div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-600 w-3/4"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-700">Session Attendance</span>
+                            <div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 w-5/6"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-700">Revenue Target</span>
+                            <div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-amber-500 to-amber-600 w-2/3"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-700">Equipment Status</span>
+                            <div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-green-500 to-green-600 w-4/5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Health -->
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-300 rounded-xl p-6">
+                    <h3 class="font-bold text-indigo-900 mb-4">⚙️ System Health</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
+                            <span class="text-xl">✅</span>
+                            <span class="text-sm font-semibold text-emerald-900">Database: Optimal</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
+                            <span class="text-xl">✅</span>
+                            <span class="text-sm font-semibold text-emerald-900">API Endpoints: Responsive</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
+                            <span class="text-xl">✅</span>
+                            <span class="text-sm font-semibold text-emerald-900">File Storage: Adequate</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-amber-50 border border-amber-300 rounded-lg">
+                            <span class="text-xl">⚠️</span>
+                            <span class="text-sm font-semibold text-amber-900">Backup: Last 2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

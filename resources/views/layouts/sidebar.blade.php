@@ -152,6 +152,24 @@
                         <a href="{{ route('admin.plans.create') }}" class="submenu-item">Create Plan</a>
                     </div>
                 </div>
+
+                <!-- Equipment & Facilities -->
+                <div>
+                    <button @click="toggleSubmenu('equipment')" 
+                            class="nav-item w-full {{ request()->routeIs('admin.equipment.*') ? 'active' : '' }}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                        <span x-show="sidebarOpen" x-transition class="flex-1 text-left">Equipment</span>
+                        <svg x-show="sidebarOpen" :class="activeSubmenu === 'equipment' ? 'rotate-180' : ''" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="activeSubmenu === 'equipment' && sidebarOpen" x-transition class="ml-11 mt-1 space-y-1">
+                        <a href="{{ route('admin.equipment.index') }}" class="submenu-item">All Equipment</a>
+                        <a href="{{ route('admin.equipment.create') }}" class="submenu-item">Add Equipment</a>
+                    </div>
+                </div>
             </div>
             @endrole
 
