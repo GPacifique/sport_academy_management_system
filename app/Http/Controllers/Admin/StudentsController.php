@@ -23,6 +23,12 @@ class StudentsController extends Controller
         return view('admin.students.index', compact('students'));
     }
 
+    public function show(Student $student)
+    {
+        $student->load(['branch', 'group', 'parent']);
+        return view('admin.students.show', compact('student'));
+    }
+
     public function create()
     {
         $branches = Branch::orderBy('name')->get();

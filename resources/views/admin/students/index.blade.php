@@ -15,34 +15,46 @@
     @if(request('view') === 'cards')
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             @foreach ($students as $student)
-                <div class="card overflow-hidden">
-                    <div class="card-body flex items-center gap-4">
-                        <img src="{{ $student->photo_url }}" alt="{{ $student->first_name }} {{ $student->second_name }}" class="w-16 h-16 rounded-full object-cover ring-2 ring-slate-200 dark:ring-slate-800">
-                        <div class="min-w-0">
-                            <div class="font-semibold text-slate-900 dark:text-slate-100 truncate">{{ $student->first_name }} {{ $student->second_name }}</div>
-                            <div class="subtle truncate">{{ $student->branch?->name ?? '—' }} @if($student->group) • Group {{ $student->group->name }} @endif</div>
-                            @if($student->parent)
-                                <div class="text-xs text-slate-500 dark:text-slate-400 truncate">Parent: <span class="text-slate-700 dark:text-slate-300">{{ $student->parent->name }}</span> • <span class="truncate inline-block align-bottom">{{ $student->parent->email }}</span></div>
-                            @endif
-                            <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
-                                @if($student->status)
-                                    <span class="badge {{ $student->status === 'active' ? 'badge-green' : 'badge-slate' }}">{{ ucfirst($student->status) }}</span>
+                <div class="card overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-gradient-to-r from-indigo-50 to-blue-50 px-4 py-3 border-b border-slate-200">
+                        <img src="{{ $student->photo_url }}" alt="{{ $student->first_name }} {{ $student->second_name }}" class="w-full h-40 object-cover rounded-lg mb-2">
+                        <div class="font-semibold text-slate-900 text-sm truncate">{{ $student->first_name }} {{ $student->second_name }}</div>
+                        
+                        <!-- Jersey Badges -->
+                        @if($student->jersey_number || $student->jersey_name)
+                            <div class="flex items-center gap-1 mt-2 flex-wrap">
+                                @if($student->jersey_number)
+                                    <span class="inline-block px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-bold rounded">Jersey #{{ $student->jersey_number }}</span>
                                 @endif
-                                @if($student->sport_discipline)
-                                    <span class="badge badge-indigo">🏆 {{ $student->sport_discipline }}</span>
-                                @endif
-                                @if($student->phone)
-                                    <span class="badge badge-slate">📞 {{ $student->phone }}</span>
-                                @endif
-                                @if($student->joined_at)
-                                    <span class="badge badge-slate">Joined {{ $student->joined_at->format('M d, Y') }}</span>
+                                @if($student->jersey_name)
+                                    <span class="inline-block px-2 py-0.5 bg-purple-100 text-purple-800 text-xs font-semibold rounded">{{ $student->jersey_name }}</span>
                                 @endif
                             </div>
+                        @endif
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="subtle truncate text-xs mb-2">{{ $student->branch?->name ?? '—' }} @if($student->group) • Group {{ $student->group->name }} @endif</div>
+                        @if($student->parent)
+                            <div class="text-xs text-slate-500 dark:text-slate-400 truncate mb-2">Parent: <span class="text-slate-700 dark:text-slate-300">{{ $student->parent->name }}</span></div>
+                        @endif
+                        <div class="mt-2 flex flex-wrap items-center gap-1 text-xs">
+                            @if($student->status)
+                                <span class="badge {{ $student->status === 'active' ? 'badge-green' : 'badge-slate' }}">{{ ucfirst($student->status) }}</span>
+                            @endif
+                            @if($student->sport_discipline)
+                                <span class="badge badge-indigo">🏆 {{ $student->sport_discipline }}</span>
+                            @endif
+                            @if($student->phone)
+                                <span class="badge badge-slate">📞 {{ $student->phone }}</span>
+                            @endif
                         </div>
                     </div>
-                    <div class="px-4 pb-4 sm:px-6 flex items-center justify-end gap-2">
-                        <a class="text-indigo-700 hover:underline px-2" href="#">View</a>
-                        <a class="text-indigo-700 hover:underline px-2" href="#">Edit</a>
+                    
+                    <!-- Action Buttons -->
+                    <div class="px-4 pb-4 sm:px-6 flex flex-col gap-2 text-sm">
+                        <a href="{{ route('admin.students.show', $student) }}" class="text-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold transition">👁️ View Details</a>
+                        <a href="{{ route('admin.students.edit', $student) }}" class="text-center px-3 py-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 rounded-lg font-semibold transition">✏️ Edit</a>
                     </div>
                 </div>
             @endforeach
@@ -53,7 +65,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Name & Jersey</th>
                         <th>Branch</th>
                         <th>Group</th>
                         <th>Sport</th>
@@ -70,7 +82,19 @@
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-3">
                                     <img src="{{ $student->photo_url }}" class="w-10 h-10 rounded-full object-cover ring-1 ring-slate-200 dark:ring-slate-800" alt="">
-                                    <span>{{ $student->first_name }} {{ $student->second_name }}</span>
+                                    <div class="min-w-0">
+                                        <div class="font-semibold text-slate-900 dark:text-white truncate">{{ $student->first_name }} {{ $student->second_name }}</div>
+                                        @if($student->jersey_number || $student->jersey_name)
+                                            <div class="flex items-center gap-1 mt-1">
+                                                @if($student->jersey_number)
+                                                    <span class="inline-block px-1.5 py-0.5 bg-blue-100 text-blue-800 text-xs font-bold rounded">J#{{ $student->jersey_number }}</span>
+                                                @endif
+                                                @if($student->jersey_name)
+                                                    <span class="inline-block px-1.5 py-0.5 bg-purple-100 text-purple-800 text-xs font-semibold rounded">{{ $student->jersey_name }}</span>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </td>
                             <td class="px-4 py-3">{{ $student->branch?->name ?? '—' }}</td>
@@ -98,8 +122,8 @@
                             </td>
                             <td class="px-4 py-3">{{ optional($student->joined_at)->format('M d, Y') }}</td>
                             <td class="px-4 py-3 text-right">
-                                <a class="text-indigo-700 hover:underline px-2" href="#">View</a>
-                                <a class="text-indigo-700 hover:underline px-2" href="#">Edit</a>
+                                <a class="text-indigo-700 hover:underline px-2 font-semibold text-sm" href="{{ route('admin.students.show', $student) }}">View</a>
+                                <a class="text-indigo-700 hover:underline px-2 font-semibold text-sm" href="{{ route('admin.students.edit', $student) }}">Edit</a>
                             </td>
                         </tr>
                     @endforeach
