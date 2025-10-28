@@ -13,11 +13,24 @@ class SessionController extends Controller
     public function create()
     {
         $coach = Auth::user();
-        $groups = Group::where('branch_id', $coach->branch_id)->orderBy('name')->get();
+        
+        // Get groups for the coach's branch, or all groups if no branch assigned
+        $groups = Group::orderBy('name');
+        if ($coach->branch_id) {
+            $groups = $groups->where('branch_id', $coach->branch_id);
+        }
+        $groups = $groups->get();
+
+        // If no groups available, show message
+        if ($groups->isEmpty()) {
+            return redirect()->route('coach.attendance.index')
+                ->with('error', 'No groups available. Please contact administrator.');
+        }
 
         return view('coach.sessions.create', [
             'groups' => $groups,
             'defaultGroupId' => $coach->group_id,
+            'branch' => $coach->branch,
         ]);
     }
 
