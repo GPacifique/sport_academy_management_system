@@ -4,11 +4,11 @@
 @section('content')
     <div class="space-y-8">
         <!-- Hero (styled like footer: gradient + animated blobs) -->
-        <div style="position: relative; background: linear-gradient(to bottom right, #1e3a8a, #6b21a8, #be185d); color: white; padding: 2rem; border-radius: 1rem; margin-bottom: 0.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); overflow: hidden;">
-            <div style="position: absolute; inset: 0; opacity: 0.14; pointer-events: none;">
-                <div style="position: absolute; top: -2rem; left: -4rem; width: 20rem; height: 20rem; background-color: #3b82f6; border-radius: 9999px; mix-blend-mode: overlay; filter: blur(72px);" class="animate-blob"></div>
-                <div style="position: absolute; top: -1rem; right: -4rem; width: 18rem; height: 18rem; background-color: #ec4899; border-radius: 9999px; mix-blend-mode: overlay; filter: blur(72px);" class="animate-blob animation-delay-2000"></div>
-                <div style="position: absolute; bottom: -3rem; left: 6rem; width: 22rem; height: 22rem; background-color: #a855f7; border-radius: 9999px; mix-blend-mode: overlay; filter: blur(72px);" class="animate-blob animation-delay-4000"></div>
+        <div class="footer-like-hero" style="margin-bottom: 0.5rem;">
+            <div class="hero-blob-layer" aria-hidden="true">
+                <div class="hero-blob animate-blob" style="top: -2rem; left: -4rem; width: 20rem; height: 20rem; background-color: #3b82f6;"></div>
+                <div class="hero-blob animate-blob animation-delay-2000" style="top: -1rem; right: -4rem; width: 18rem; height: 18rem; background-color: #ec4899;"></div>
+                <div class="hero-blob animate-blob animation-delay-4000" style="bottom: -3rem; left: 6rem; width: 22rem; height: 22rem; background-color: #a855f7;"></div>
             </div>
 
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4" style="position: relative; z-index: 2;">
@@ -40,10 +40,10 @@
                     </select>
                     <select name="range" class="px-3 py-2 border border-slate-200 rounded-lg text-sm">
                         @php($r = $currentRange ?? 'today')
-                        <option value="today" @selected($r==='today')>Today</option>
-                        <option value="week" @selected($r==='week')>This Week</option>
-                        <option value="month" @selected($r==='month')>This Month</option>
-                        <option value="all" @selected($r==='all')>All Time</option>
+                        <option value="today" {{ ($r==='today') ? 'selected' : '' }}>Today</option>
+                        <option value="week" {{ ($r==='week') ? 'selected' : '' }}>This Week</option>
+                        <option value="month" {{ ($r==='month') ? 'selected' : '' }}>This Month</option>
+                        <option value="all" {{ ($r==='all') ? 'selected' : '' }}>All Time</option>
                     </select>
                     <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">Apply</button>
                     <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 bg-slate-100 rounded-lg text-sm">Reset</a>

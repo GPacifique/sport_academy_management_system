@@ -11,6 +11,7 @@
 
     {{-- Custom CSS (No Tailwind) --}}
     <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     @stack('head')
 </head>
 <body class="font-sans antialiased">

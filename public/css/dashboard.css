@@ -1,0 +1,46 @@
+/* Dashboard shared styles: hero, animated blobs, and chart helpers */
+.footer-like-hero {
+  position: relative;
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e3a8a 0%, #6b21a8 50%, #be185d 100%);
+}
+
+.footer-like-hero .hero-blob-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  mix-blend-mode: overlay;
+  filter: blur(64px);
+  transform: translate3d(0,0,0);
+  opacity: 0.95;
+}
+
+.hero-blob.animate-blob { animation: float-blob 8s ease-in-out infinite; }
+.hero-blob.animation-delay-2000 { animation-delay: 2s; }
+.hero-blob.animation-delay-4000 { animation-delay: 4s; }
+
+@keyframes float-blob {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(18px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Chart canvas helpers: make canvas responsive in cards */
+.card-chart { width: 100%; height: 72px; }
+.card-chart--large { height: 120px; }
+
+/* Tiny tweaks to ensure blade-driven inline color palettes keep good contrast */
+.footer-like-hero h1, .footer-like-hero p { color: rgba(255,255,255,0.95); }
+
+/* Utility: soft borders for KPI cards inside the dashboards */
+.kpi-soft { border: 1px solid rgba(15,23,42,0.04); }
