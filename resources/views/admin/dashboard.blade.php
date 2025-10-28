@@ -56,12 +56,12 @@
             <div class="lg:col-span-1 grid grid-cols-2 gap-3">
                 <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
                     <div class="text-xs text-slate-500">Students</div>
-                    <div class="text-2xl font-bold text-slate-900">{{ $stats['activeStudents'] ?? 0 }}</div>
+                        <div class="text-2xl font-bold text-slate-900" data-animate-count>{{ $stats['activeStudents'] ?? 0 }}</div>
                     <div class="text-xs text-slate-400 mt-1">Active</div>
                 </div>
                 <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
                     <div class="text-xs text-slate-500">Branches</div>
-                    <div class="text-2xl font-bold text-slate-900">{{ $stats['totalBranches'] ?? 0 }}</div>
+                        <div class="text-2xl font-bold text-slate-900" data-animate-count>{{ $stats['totalBranches'] ?? 0 }}</div>
                     <div class="text-xs text-slate-400 mt-1">Locations</div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         <div class="flex items-start justify-between">
                             <div>
                                 <div class="text-xs text-slate-500 font-semibold">Total Users</div>
-                                <div class="mt-2 text-3xl font-extrabold text-slate-900">{{ $stats['totalUsers'] ?? 0 }}</div>
+                                    <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['totalUsers'] ?? 0 }}</div>
                             </div>
                             <div class="text-3xl">👥</div>
                         </div>
@@ -88,7 +88,7 @@
                         <div class="flex items-start justify-between">
                             <div>
                                 <div class="text-xs text-slate-500 font-semibold">Branches</div>
-                                <div class="mt-2 text-3xl font-extrabold text-slate-900">{{ $stats['totalBranches'] ?? 0 }}</div>
+                                    <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['totalBranches'] ?? 0 }}</div>
                             </div>
                             <div class="text-3xl">🏢</div>
                         </div>
@@ -101,7 +101,7 @@
                         <div class="flex items-start justify-between">
                             <div>
                                 <div class="text-xs text-slate-500 font-semibold">Active Students</div>
-                                <div class="mt-2 text-3xl font-extrabold text-slate-900">{{ $stats['activeStudents'] ?? 0 }}</div>
+                                    <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['activeStudents'] ?? 0 }}</div>
                             </div>
                             <div class="text-3xl">🎓</div>
                         </div>
@@ -114,7 +114,7 @@
                         <div class="flex items-start justify-between">
                             <div>
                                 <div class="text-xs text-slate-500 font-semibold">Sessions ({{ $rangeLabel ?? 'Today' }})</div>
-                                <div class="mt-2 text-3xl font-extrabold text-slate-900">{{ $stats['todaySessions'] ?? 0 }}</div>
+                                    <div class="mt-2 text-3xl font-extrabold text-slate-900" data-animate-count>{{ $stats['todaySessions'] ?? 0 }}</div>
                             </div>
                             <div class="text-3xl">📅</div>
                         </div>
@@ -129,7 +129,7 @@
             <a href="{{ route('accountant.subscriptions.index') }}" class="block">
                 <div class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border border-green-200 shadow-sm hover:shadow-md transition">
                     <div class="text-xs text-green-700 font-semibold">Active Subscriptions</div>
-                    <div class="text-2xl font-bold text-slate-900 mt-2">{{ $stats['activeSubscriptions'] ?? 0 }}</div>
+                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ $stats['activeSubscriptions'] ?? 0 }}</div>
                     <div class="text-xs text-slate-500 mt-1">of {{ $stats['totalSubscriptions'] ?? 0 }} total</div>
                 </div>
             </a>
@@ -137,7 +137,7 @@
             <a href="{{ route('accountant.payments.index') }}" class="block">
                 <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-5 rounded-xl border border-emerald-200 shadow-sm hover:shadow-md transition">
                     <div class="text-xs text-emerald-700 font-semibold">Revenue This Month</div>
-                    <div class="text-2xl font-bold text-slate-900 mt-2">{{ number_format($stats['revenueThisMonth'] ?? 0) }} Rwf</div>
+                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ number_format($stats['revenueThisMonth'] ?? 0) }} Rwf</div>
                     <div class="text-xs text-slate-500 mt-1">Monthly income</div>
                 </div>
             </a>
@@ -145,7 +145,7 @@
             <a href="{{ route('accountant.invoices.index') }}" class="block">
                 <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-5 rounded-xl border border-amber-200 shadow-sm hover:shadow-md transition">
                     <div class="text-xs text-amber-700 font-semibold">Pending Invoices</div>
-                    <div class="text-2xl font-bold text-slate-900 mt-2">{{ $stats['pendingInvoices'] ?? 0 }}</div>
+                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ $stats['pendingInvoices'] ?? 0 }}</div>
                     <div class="text-xs text-slate-500 mt-1">Awaiting payment</div>
                 </div>
             </a>
@@ -153,7 +153,7 @@
             <a href="{{ route('accountant.payments.index') }}" class="block">
                 <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-5 rounded-xl border border-indigo-200 shadow-sm hover:shadow-md transition">
                     <div class="text-xs text-indigo-700 font-semibold">Total Revenue</div>
-                    <div class="text-2xl font-bold text-slate-900 mt-2">{{ number_format($stats['totalRevenue'] ?? 0) }} Rwf</div>
+                            <div class="text-2xl font-bold text-slate-900 mt-2" data-animate-count>{{ number_format($stats['totalRevenue'] ?? 0) }} Rwf</div>
                     <div class="text-xs text-slate-500 mt-1">All-time earnings</div>
                 </div>
             </a>

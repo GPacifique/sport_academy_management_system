@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initThemeToggle();
     initFormInteractions();
+    initDashboardEnhancements();
 });
 
 /* ============================================================
@@ -405,3 +406,47 @@ document.addEventListener('keydown', function(e) {
 });
 
 console.log('✨ Custom Design System Loaded Successfully');
+
+/* ============================================================
+   Extra: Dashboard enhancements (count-up animation for KPIs)
+   Elements should have `data-animate-count` attribute.
+   ============================================================ */
+function initDashboardEnhancements() {
+    const els = document.querySelectorAll('[data-animate-count]');
+    if (!els.length) return;
+
+    function parseNumber(text) {
+        if (!text) return 0;
+        return parseFloat(String(text).replace(/,/g, '').replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatNumber(value, decimals) {
+        try { return new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value); }
+        catch (e) { return value.toFixed(decimals); }
+    }
+
+    function animate(el, duration = 1200) {
+        const orig = el.textContent.trim();
+        const target = parseNumber(orig);
+        const hasDecimal = String(orig).indexOf('.') !== -1;
+        const decimals = hasDecimal ? String(orig).split('.').pop().length : 0;
+        if (!target || isNaN(target)) return;
+
+        let start = null; const startValue = 0;
+        function step(ts) {
+            if (!start) start = ts;
+            const progress = Math.min((ts - start) / duration, 1);
+            const current = startValue + (target - startValue) * (1 - Math.pow(1 - progress, 3));
+            // preserve non-numeric suffix/prefix
+            const suffix = orig.replace(/[-+0-9,\.\s]/g, '');
+            el.textContent = formatNumber(current, decimals) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = formatNumber(target, decimals) + suffix;
+        }
+        requestAnimationFrame(step);
+    }
+
+    els.forEach(el => {
+        try { animate(el, 1200); } catch (e) { /* ignore */ }
+    });
+}
