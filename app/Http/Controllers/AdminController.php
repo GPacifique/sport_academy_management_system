@@ -102,9 +102,10 @@ class AdminController extends Controller
         }
 
         // Coach workload (top 5 coaches by session count this month)
-        $coachWorkload = TrainingSession::selectRaw('coach_id, COUNT(*) as session_count')
+        $coachWorkload = TrainingSession::selectRaw('coach_user_id, COUNT(*) as session_count')
             ->whereBetween('date', [now()->startOfMonth()->toDateString(), now()->endOfMonth()->toDateString()])
-            ->groupBy('coach_id')
+            ->whereNotNull('coach_user_id')
+            ->groupBy('coach_user_id')
             ->orderByDesc('session_count')
             ->limit(5)
             ->with('coach:id,name')
