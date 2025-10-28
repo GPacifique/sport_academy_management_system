@@ -77,7 +77,7 @@
                     @foreach($group->students as $student)
                         <div class="border border-slate-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition">
                             <div class="flex items-start justify-between mb-3">
-                                <div class="font-semibold text-slate-900">{{ $student->first_name }} {{ $student->last_name }}</div>
+                                <div class="font-semibold text-slate-900">{{ $student->first_name }} {{ $student->second_name }}</div>
                                 <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Active</span>
                             </div>
                             <div class="text-sm text-slate-600 space-y-1">

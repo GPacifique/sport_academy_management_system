@@ -76,7 +76,7 @@
                                 @foreach($recentPayments as $p)
                                     <tr>
                                         <td class="font-medium">{{ optional($p->paid_at)->format('M d, Y H:i') ?? $p->created_at->format('M d, Y H:i') }}</td>
-                                        <td class="font-medium">{{ $p->student?->first_name }} {{ $p->student?->last_name }}</td>
+                                        <td class="font-medium">{{ $p->student?->first_name }} {{ $p->student?->second_name }}</td>
                                         <td class="font-medium">{{ $p->subscription?->plan?->name ?? '—' }}</td>
                                         <td class="font-semibold">{{ number_format($p->amount_cents/100,2) }} {{ $p->currency }}</td>
                                         <td class="font-medium">{{ ucfirst(str_replace('_',' ',$p->method)) }}</td>

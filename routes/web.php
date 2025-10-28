@@ -151,6 +151,7 @@ Route::middleware(['auth', 'role:coach|admin|super-admin'])->prefix('coach')->gr
     Route::get('/attendance/session/{session}', [\App\Http\Controllers\Coach\AttendanceController::class, 'show'])->name('coach.attendance.show');
     Route::post('/attendance/session/{session}', [\App\Http\Controllers\Coach\AttendanceController::class, 'store'])->name('coach.attendance.store');
     // Session scheduling
+    Route::get('/sessions', [\App\Http\Controllers\Coach\SessionController::class, 'index'])->name('coach.sessions.index');
     Route::get('/sessions/create', [\App\Http\Controllers\Coach\SessionController::class, 'create'])->name('coach.sessions.create');
     Route::post('/sessions', [\App\Http\Controllers\Coach\SessionController::class, 'store'])->name('coach.sessions.store');
     // Students (coach scope)

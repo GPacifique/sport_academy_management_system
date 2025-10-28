@@ -5,7 +5,7 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-2xl font-bold">Attendance History</h1>
-            <p class="text-neutral-600 dark:text-neutral-400">{{ $student->first_name }} {{ $student->last_name }}</p>
+            <p class="text-neutral-600 dark:text-neutral-400">{{ $student->first_name }} {{ $student->second_name }}</p>
         </div>
         <div class="flex items-center gap-3">
             <a href="{{ route('coach.students.show', $student) }}" class="text-sm underline">Profile</a>

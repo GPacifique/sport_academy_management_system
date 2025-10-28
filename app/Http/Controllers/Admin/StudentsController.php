@@ -187,7 +187,7 @@ class StudentsController extends Controller
 
             $entry = [
                 'student_id' => $studentId,
-                'student_name' => $student ? ($student->first_name.' '.$student->last_name) : null,
+                'student_name' => $student ? ($student->first_name.' '.$student->second_name) : null,
                 'filename' => $filename,
                 'status' => null,
             ];

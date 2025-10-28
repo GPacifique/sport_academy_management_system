@@ -31,7 +31,7 @@ class AttendanceController extends Controller
             ->where('branch_id', $session->branch_id)
             ->where('group_id', $session->group_id)
             ->orderBy('first_name')
-            ->orderBy('last_name')
+            ->orderBy('second_name')
             ->get();
 
         $existing = StudentAttendance::where('training_session_id', $session->id)

@@ -12,7 +12,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <div class="label mb-1">Student</div>
-                        <div class="input">{{ $subscription->student->first_name }} {{ $subscription->student->last_name }}</div>
+                        <div class="input">{{ $subscription->student->first_name }} {{ $subscription->student->second_name }}</div>
                     </div>
                     <x-form.select label="Plan" name="subscription_plan_id">
                         @foreach($plans as $p)

@@ -25,7 +25,7 @@
             <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
                 @forelse ($students as $student)
                     <tr>
-                        <td class="px-4 py-3">{{ $student->first_name }} {{ $student->last_name }}</td>
+                        <td class="px-4 py-3">{{ $student->first_name }} {{ $student->second_name }}</td>
                         <td class="px-4 py-3">{{ $student->group?->name ?? '—' }}</td>
                         <td class="px-4 py-3">{{ $student->parent?->name ?? '—' }}</td>
                         <td class="px-4 py-3">{{ $student->phone ?? '—' }}</td>

@@ -19,7 +19,7 @@ class PaymentsController extends Controller
         $payments = Payment::with(['student','subscription.plan','invoice'])
             ->when($q, function($query) use ($q) {
                 $query->whereHas('student', function($s) use ($q) {
-                    $s->where('first_name','like',"%$q%")->orWhere('last_name','like',"%$q%");
+                    $s->where('first_name','like',"%$q%")->orWhere('second_name','like',"%$q%");
                 })->orWhere('reference','like',"%$q%");
             })
             ->when($from, fn($query) => $query->whereDate('paid_at', '>=', $from))
@@ -54,7 +54,7 @@ class PaymentsController extends Controller
             foreach ($payments as $p) {
                 fputcsv($file, [
                     optional($p->paid_at)->format('Y-m-d H:i') ?? $p->created_at->format('Y-m-d H:i'),
-                    $p->student->first_name . ' ' . $p->student->last_name,
+                    $p->student->first_name . ' ' . $p->student->second_name,
                     optional($p->subscription?->plan)->name ?? '—',
                     $p->invoice_id ? "Invoice #{$p->invoice_id}" : '—',
                     number_format($p->amount_cents / 100, 2),
@@ -73,7 +73,7 @@ class PaymentsController extends Controller
 
     public function create()
     {
-        $students = Student::orderBy('first_name')->orderBy('last_name')->get();
+        $students = Student::orderBy('first_name')->orderBy('second_name')->get();
         $invoices = \App\Models\Invoice::with('subscription.student')
             ->whereIn('status', ['pending', 'overdue'])
             ->orderBy('due_date')

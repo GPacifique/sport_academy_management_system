@@ -7,7 +7,7 @@
         <x-button :href="route('parent.dashboard')" variant="secondary" class="mb-4">
             ← Back to Children
         </x-button>
-        <h1 class="page-title">{{ $student->first_name }} {{ $student->last_name }} - Payment History</h1>
+        <h1 class="page-title">{{ $student->first_name }} {{ $student->second_name }} - Payment History</h1>
     </div>
     
     @if($student->subscriptions->isEmpty())

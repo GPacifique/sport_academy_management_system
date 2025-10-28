@@ -12,7 +12,7 @@
                     <x-form.select label="Student" name="student_id">
                         <option value="">—</option>
                         @foreach($students as $st)
-                            <option value="{{ $st->id }}" @selected(old('student_id')==$st->id)>{{ $st->first_name }} {{ $st->last_name }}</option>
+                            <option value="{{ $st->id }}" @selected(old('student_id')==$st->id)>{{ $st->first_name }} {{ $st->second_name }}</option>
                         @endforeach
                     </x-form.select>
                     <x-form.select label="Plan" name="subscription_plan_id">

@@ -22,7 +22,7 @@
                 <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
                     @foreach ($students as $student)
                         <tr>
-                            <td class="px-3 py-2">{{ $student->first_name }} {{ $student->last_name }}</td>
+                            <td class="px-3 py-2">{{ $student->first_name }} {{ $student->second_name }}</td>
                             <td class="px-3 py-2">
                                 <select name="attendance[{{ $student->id }}][status]" class="border rounded px-2 py-1 dark:bg-neutral-900 dark:border-neutral-700">
                                     <option value="present" @selected(($existing[$student->id] ?? '') === 'present')>Present</option>

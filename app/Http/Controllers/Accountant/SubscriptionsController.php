@@ -17,7 +17,7 @@ class SubscriptionsController extends Controller
         $subs = Subscription::with(['student','plan'])
             ->when($q, function($query) use ($q) {
                 $query->whereHas('student', function($s) use ($q) {
-                    $s->where('first_name','like',"%$q%")->orWhere('last_name','like',"%$q%");
+                    $s->where('first_name','like',"%$q%")->orWhere('second_name','like',"%$q%");
                 });
             })
             ->orderByDesc('created_at')
@@ -29,7 +29,7 @@ class SubscriptionsController extends Controller
     public function create()
     {
         $plans = SubscriptionPlan::where('active', true)->orderBy('name')->get();
-        $students = Student::orderBy('first_name')->orderBy('last_name')->get();
+        $students = Student::orderBy('first_name')->orderBy('second_name')->get();
         return view('accountant.subscriptions.create', compact('plans','students'));
     }
 

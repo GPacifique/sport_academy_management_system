@@ -22,7 +22,7 @@
             <tbody>
                 @foreach($subs as $s)
                     <tr>
-                        <td class="px-4 py-3">{{ $s->student->first_name }} {{ $s->student->last_name }}</td>
+                        <td class="px-4 py-3">{{ $s->student->first_name }} {{ $s->student->second_name }}</td>
                         <td class="px-4 py-3">{{ $s->plan->name }}</td>
                         <td class="px-4 py-3">
                             <x-badge color="{{ $s->status === 'active' ? 'green' : 'slate' }}">{{ ucfirst($s->status) }}</x-badge>

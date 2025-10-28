@@ -15,7 +15,7 @@ class InvoicesController extends Controller
         $invoices = Invoice::with(['subscription.student','subscription.plan'])
             ->when($q, function($query) use ($q) {
                 $query->whereHas('subscription.student', function($s) use ($q) {
-                    $s->where('first_name','like',"%$q%")->orWhere('last_name','like',"%$q%");
+                    $s->where('first_name','like',"%$q%")->orWhere('second_name','like',"%$q%");
                 });
             })
             ->orderByDesc('due_date')

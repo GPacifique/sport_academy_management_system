@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
+    public function index()
+    {
+        $coach = Auth::user();
+        
+        // Get all sessions for this coach
+        $sessions = TrainingSession::where('coach_user_id', $coach->id)
+            ->with(['group', 'branch'])
+            ->orderByDesc('date')
+            ->orderByDesc('start_time')
+            ->paginate(15);
+
+        return view('coach.sessions.index', compact('sessions'));
+    }
+
     public function create()
     {
         $coach = Auth::user();

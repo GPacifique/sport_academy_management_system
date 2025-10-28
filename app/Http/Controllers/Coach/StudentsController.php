@@ -21,12 +21,12 @@ class StudentsController extends Controller
             ->when($q !== '', function ($query) use ($q) {
                 $query->where(function ($sub) use ($q) {
                     $sub->where('first_name', 'like', "%$q%")
-                        ->orWhere('last_name', 'like', "%$q%")
+                        ->orWhere('second_name', 'like', "%$q%")
                         ->orWhere('phone', 'like', "%$q%");
                 });
             })
             ->orderBy('first_name')
-            ->orderBy('last_name')
+            ->orderBy('second_name')
             ->paginate(15)
             ->withQueryString();
 

@@ -47,7 +47,7 @@
                 @foreach($payments as $p)
                     <tr>
                         <td class="px-4 py-3">{{ optional($p->paid_at)->format('Y-m-d H:i') ?? $p->created_at->format('Y-m-d H:i') }}</td>
-                        <td class="px-4 py-3">{{ $p->student->first_name }} {{ $p->student->last_name }}</td>
+                        <td class="px-4 py-3">{{ $p->student->first_name }} {{ $p->student->second_name }}</td>
                         <td class="px-4 py-3">{{ optional($p->subscription?->plan)->name ?? '—' }}</td>
                         <td class="px-4 py-3">{{ ucfirst(str_replace('_',' ', $p->method)) }}</td>
                         <td class="px-4 py-3">

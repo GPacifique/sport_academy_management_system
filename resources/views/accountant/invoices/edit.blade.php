@@ -12,7 +12,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <div class="label mb-1">Student</div>
-                        <div class="input">{{ $invoice->subscription->student->first_name }} {{ $invoice->subscription->student->last_name }}</div>
+                        <div class="input">{{ $invoice->subscription->student->first_name }} {{ $invoice->subscription->student->second_name }}</div>
                     </div>
                     <div>
                         <div class="label mb-1">Plan</div>

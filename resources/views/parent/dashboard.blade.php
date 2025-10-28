@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-xl font-semibold text-slate-900 mb-4">
-                            {{ $child->first_name }} {{ $child->last_name }}
+                            {{ $child->first_name }} {{ $child->second_name }}
                         </h2>
                         
                         @if($child->subscriptions->isEmpty())

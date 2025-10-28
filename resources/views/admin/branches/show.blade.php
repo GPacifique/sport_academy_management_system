@@ -139,7 +139,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach($branch->students as $student)
                         <div class="border border-slate-200 rounded-lg p-4 hover:border-emerald-300 hover:shadow-md transition">
-                            <div class="font-semibold text-slate-900 mb-2">{{ $student->first_name }} {{ $student->last_name }}</div>
+                            <div class="font-semibold text-slate-900 mb-2">{{ $student->first_name }} {{ $student->second_name }}</div>
                             <div class="text-sm text-slate-600 space-y-1">
                                 <p>📧 {{ $student->email ?? 'N/A' }}</p>
                                 <p>📱 {{ $student->phone ?? 'N/A' }}</p>

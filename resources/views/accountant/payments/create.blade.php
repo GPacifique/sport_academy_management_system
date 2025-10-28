@@ -12,14 +12,14 @@
                     <x-form.select label="Student" name="student_id">
                         <option value="">—</option>
                         @foreach($students as $st)
-                            <option value="{{ $st->id }}" @selected(old('student_id')==$st->id)>{{ $st->first_name }} {{ $st->last_name }}</option>
+                            <option value="{{ $st->id }}" @selected(old('student_id')==$st->id)>{{ $st->first_name }} {{ $st->second_name }}</option>
                         @endforeach
                     </x-form.select>
                     <x-form.select label="Invoice (optional)" name="invoice_id">
                         <option value="">— No Invoice —</option>
                         @foreach($invoices as $inv)
                             <option value="{{ $inv->id }}" @selected(old('invoice_id')==$inv->id)>
-                                {{ $inv->subscription->student->first_name }} {{ $inv->subscription->student->last_name }} - 
+                                {{ $inv->subscription->student->first_name }} {{ $inv->subscription->student->second_name }} - 
                                 Due {{ $inv->due_date->format('M d, Y') }} - 
                                 {{ number_format($inv->outstanding_balance/100, 2) }} {{ $inv->currency }} due
                             </option>

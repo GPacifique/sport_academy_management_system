@@ -26,7 +26,7 @@
                 @foreach($invoices as $inv)
                     <tr>
                         <td class="px-4 py-3">{{ $inv->due_date->format('Y-m-d') }}</td>
-                        <td class="px-4 py-3">{{ $inv->subscription->student->first_name }} {{ $inv->subscription->student->last_name }}</td>
+                        <td class="px-4 py-3">{{ $inv->subscription->student->first_name }} {{ $inv->subscription->student->second_name }}</td>
                         <td class="px-4 py-3">{{ $inv->subscription->plan->name }}</td>
                         <td class="px-4 py-3">{{ number_format($inv->amount_cents/100, 2) }} {{ $inv->currency }}</td>
                         <td class="px-4 py-3">{{ number_format($inv->total_paid/100, 2) }}</td>
