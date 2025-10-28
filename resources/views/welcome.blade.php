@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Modern Sport Club Management System - Manage members, coaches, schedules, attendance, and billing in one platform.">
+    <meta name="description" content="Modern Sport Academy Management System - Manage members, coaches, schedules, attendance, and billing in one platform.">
     <title>{{ config('app.name', 'Sport Academy MS') }} - Modern Academy Management Platform</title>
 
     <!-- Preconnect to font service for faster load -->
@@ -29,7 +29,7 @@
                     <path d="M30 25 L30 35 Q30 50 40 55 L40 70 L35 70 L35 80 L65 80 L65 70 L60 70 L60 55 Q70 50 70 35 L70 25 Z M25 25 L25 35 Q25 40 30 40 L30 30 L25 30 Z M70 30 L70 40 Q75 40 75 35 L75 25 Z" fill="url(#trophy-grad)"/>
                     <polygon points="45,15 47,22 54,23 49,27 51,34 45,30 39,34 41,27 36,23 43,22" fill="#f59e0b"/>
                 </svg>
-                <a href="/" class="logo-text" title="Sport Club MS - Home">Sport Club MS</a>
+                <a href="/" class="logo-text" title="Sport Academy MS - Home">Sport Academy MS</a>
             </div>
 
             <!-- Navigation Menu -->
@@ -71,7 +71,7 @@
         <div class="container">
             <header class="section-title">
                 <h2 role="heading" aria-level="2">Core Modules</h2>
-                <p class="section-subtitle">Everything you need to run your club efficiently</p>
+                <p class="section-subtitle">Everything you need to run your academy efficiently</p>
             </header>
 
             <div class="grid grid-cols-4" role="list">
@@ -130,8 +130,8 @@
     <section id="features" class="section-alt" role="region" aria-label="Key features and benefits">
         <div class="container">
             <header class="section-title">
-                <h2 role="heading" aria-level="2">Why Clubs Choose Us</h2>
-                <p class="section-subtitle">Powerful features designed for real club operations</p>
+                <h2 role="heading" aria-level="2">Why Academies Choose Us</h2>
+                <p class="section-subtitle">Powerful features designed for real academy operations</p>
             </header>
 
             <div class="features-grid" role="list">
@@ -202,7 +202,7 @@
     <section class="section-light" role="region" aria-label="Call to action section">
         <div class="container">
             <article class="cta-section">
-                <h2 class="cta-title" role="heading" aria-level="2">Ready to streamline your club?</h2>
+                <h2 class="cta-title" role="heading" aria-level="2">Ready to streamline your academy?</h2>
                 <p class="cta-text" role="doc-subtitle">Join organizations already saving time with modern scheduling, attendance, and billing tools</p>
                 <div class="cta-buttons" role="group" aria-label="Get started options">
                     <a href="{{ route('register') }}" class="btn btn-primary btn-lg" role="button">Get Started</a>
@@ -227,9 +227,9 @@
                         <path d="M30 25 L30 35 Q30 50 40 55 L40 70 L35 70 L35 80 L65 80 L65 70 L60 70 L60 55 Q70 50 70 35 L70 25 Z M25 25 L25 35 Q25 40 30 40 L30 30 L25 30 Z M70 30 L70 40 Q75 40 75 35 L75 25 Z" fill="url(#trophy-grad-footer)"/>
                         <polygon points="45,15 47,22 54,23 49,27 51,34 45,30 39,34 41,27 36,23 43,22" fill="#f59e0b"/>
                     </svg>
-                    <span class="logo-text" style="color: var(--white);" id="footer-brand">Sport Club MS</span>
+                    <span class="logo-text" style="color: var(--white);" id="footer-brand">Sport Academy MS</span>
                 </div>
-                <p>All-in-one sport club management platform</p>
+                <p>All-in-one sport academy management platform</p>
             </section>
 
             <nav class="footer-section" aria-label="Quick navigation links">

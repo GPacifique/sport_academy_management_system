@@ -33,7 +33,7 @@
                     </svg>
                 </div>
                 <div x-show="sidebarOpen" x-transition class="flex flex-col">
-                    <span class="font-bold text-lg tracking-tight">Sport Club</span>
+                    <span class="font-bold text-lg tracking-tight">Sport Academy</span>
                     <span class="text-xs text-slate-400">Management System</span>
                 </div>
             </div>

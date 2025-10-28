@@ -7,7 +7,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold text-slate-900">Admin Dashboard</h1>
-                <p class="text-slate-600 mt-1">Overview of your sports club operations</p>
+                <p class="text-slate-600 mt-1">Overview of your sports academy operations</p>
             </div>
         </div>
 

@@ -13,7 +13,7 @@
             </a>
             <div>
                 <h1 class="text-3xl font-bold text-slate-900">Add New Expense</h1>
-                <p class="text-slate-600 mt-1">Record a new expense for the club</p>
+                <p class="text-slate-600 mt-1">Record a new expense for the academy</p>
             </div>
         </div>
     </div>

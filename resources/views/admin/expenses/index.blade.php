@@ -6,7 +6,7 @@
     <div class="mb-8 flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold text-slate-900">Expenses Management</h1>
-            <p class="text-slate-600 mt-1">Track and manage all club expenses</p>
+            <p class="text-slate-600 mt-1">Track and manage all academy expenses</p>
         </div>
         <a href="{{ route('admin.expenses.create') }}" 
            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition">
