@@ -3,9 +3,15 @@
 
 @section('content')
     <div class="space-y-6">
-        <!-- Hero -->
-        <div class="bg-gradient-to-r from-emerald-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <!-- Hero (reuse footer styling: gradient + animated blobs) -->
+        <div style="position: relative; background: linear-gradient(to bottom right, #1e3a8a, #6b21a8, #be185d); color: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); overflow: hidden;">
+            <div style="position: absolute; inset: 0; opacity: 0.12; pointer-events: none;">
+                <div style="position: absolute; top: -1.5rem; left: -3rem; width: 16rem; height: 16rem; background-color: #3b82f6; border-radius: 9999px; mix-blend-mode: overlay; filter: blur(64px);" class="animate-blob"></div>
+                <div style="position: absolute; top: -1rem; right: -3rem; width: 14rem; height: 14rem; background-color: #ec4899; border-radius: 9999px; mix-blend-mode: overlay; filter: blur(64px);" class="animate-blob animation-delay-2000"></div>
+                <div style="position: absolute; bottom: -2rem; left: 4rem; width: 18rem; height: 18rem; background-color: #a855f7; border-radius: 9999px; mix-blend-mode: overlay; filter: blur(64px);" class="animate-blob animation-delay-4000"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4" style="position: relative; z-index: 2;">
                 <div>
                     <h1 class="text-3xl font-extrabold">Finances & Billing</h1>
                     <p class="text-emerald-100 mt-1">Overview of revenue, invoices, and expenses</p>
