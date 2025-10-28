@@ -175,6 +175,97 @@
             </a>
         </div>
 
+        <!-- Quick Actions Grid -->
+        <div>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">⚡ Quick Actions</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <a href="{{ route('admin.students.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">🎓</div>
+                        <div class="text-sm font-semibold text-slate-900">Students</div>
+                        <div class="text-xs text-slate-500 mt-1">Manage</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.students.create') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">➕</div>
+                        <div class="text-sm font-semibold text-slate-900">New Student</div>
+                        <div class="text-xs text-slate-500 mt-1">Add</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.sessions.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📅</div>
+                        <div class="text-sm font-semibold text-slate-900">Sessions</div>
+                        <div class="text-xs text-slate-500 mt-1">View All</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.sessions.create') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📝</div>
+                        <div class="text-sm font-semibold text-slate-900">New Session</div>
+                        <div class="text-xs text-slate-500 mt-1">Schedule</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.users.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">👥</div>
+                        <div class="text-sm font-semibold text-slate-900">Users</div>
+                        <div class="text-xs text-slate-500 mt-1">Manage</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.users.create') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">👤</div>
+                        <div class="text-sm font-semibold text-slate-900">New User</div>
+                        <div class="text-xs text-slate-500 mt-1">Create</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.groups.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">👨‍👩‍👧‍👦</div>
+                        <div class="text-sm font-semibold text-slate-900">Groups</div>
+                        <div class="text-xs text-slate-500 mt-1">Manage</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.branches.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">🏢</div>
+                        <div class="text-sm font-semibold text-slate-900">Branches</div>
+                        <div class="text-xs text-slate-500 mt-1">Locations</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.equipment.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">⚽</div>
+                        <div class="text-sm font-semibold text-slate-900">Equipment</div>
+                        <div class="text-xs text-slate-500 mt-1">Assets</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.attendance.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">✅</div>
+                        <div class="text-sm font-semibold text-slate-900">Attendance</div>
+                        <div class="text-xs text-slate-500 mt-1">Track</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.payments.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">💰</div>
+                        <div class="text-sm font-semibold text-slate-900">Payments</div>
+                        <div class="text-xs text-slate-500 mt-1">Finance</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.invoices.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📄</div>
+                        <div class="text-sm font-semibold text-slate-900">Invoices</div>
+                        <div class="text-xs text-slate-500 mt-1">Billing</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <!-- Today's Sessions (polished) -->
         <div>
             <h2 class="text-xl font-bold text-slate-900 mb-4">📅 Today's Sessions</h2>

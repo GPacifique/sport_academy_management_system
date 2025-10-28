@@ -177,10 +177,102 @@
             </div>
         </div>
 
+        <!-- Quick Actions Grid -->
+        <div>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">⚡ Quick Actions</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <a href="{{ route('accountant.payments.create') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">💳</div>
+                        <div class="text-sm font-semibold text-slate-900">Record Payment</div>
+                        <div class="text-xs text-slate-500 mt-1">New</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.payments.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">💰</div>
+                        <div class="text-sm font-semibold text-slate-900">All Payments</div>
+                        <div class="text-xs text-slate-500 mt-1">View</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.invoices.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📄</div>
+                        <div class="text-sm font-semibold text-slate-900">Invoices</div>
+                        <div class="text-xs text-slate-500 mt-1">Manage</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.invoices.create') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📝</div>
+                        <div class="text-sm font-semibold text-slate-900">New Invoice</div>
+                        <div class="text-xs text-slate-500 mt-1">Create</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.subscriptions.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📋</div>
+                        <div class="text-sm font-semibold text-slate-900">Subscriptions</div>
+                        <div class="text-xs text-slate-500 mt-1">Manage</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.expenses.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">💸</div>
+                        <div class="text-sm font-semibold text-slate-900">Expenses</div>
+                        <div class="text-xs text-slate-500 mt-1">Track</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.expenses.create') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">➕</div>
+                        <div class="text-sm font-semibold text-slate-900">New Expense</div>
+                        <div class="text-xs text-slate-500 mt-1">Add</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.students.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">🎓</div>
+                        <div class="text-sm font-semibold text-slate-900">Students</div>
+                        <div class="text-xs text-slate-500 mt-1">View</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.plans.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📦</div>
+                        <div class="text-sm font-semibold text-slate-900">Plans</div>
+                        <div class="text-xs text-slate-500 mt-1">Pricing</div>
+                    </div>
+                </a>
+                <a href="#" onclick="window.print(); return false;" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">🖨️</div>
+                        <div class="text-sm font-semibold text-slate-900">Print Report</div>
+                        <div class="text-xs text-slate-500 mt-1">Export</div>
+                    </div>
+                </a>
+                <a href="{{ route('accountant.dashboard') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">📊</div>
+                        <div class="text-sm font-semibold text-slate-900">Reports</div>
+                        <div class="text-xs text-slate-500 mt-1">Analytics</div>
+                    </div>
+                </a>
+                <a href="{{ route('admin.branches.index') }}" class="card hover:shadow-lg transition-shadow">
+                    <div class="card-body p-4 text-center">
+                        <div class="text-3xl mb-2">🏢</div>
+                        <div class="text-sm font-semibold text-slate-900">Branches</div>
+                        <div class="text-xs text-slate-500 mt-1">Locations</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <!-- Recent transactions + Quick Actions -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 bg-white rounded-lg shadow-md border border-slate-200 p-6">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Recent Transactions</h2>
+            <div class="lg:col-span-2 card">
+                <div class="card-body p-6">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4">Recent Transactions</h2>
                 @if(($recentPayments ?? collect())->isEmpty())
                     <div class="text-sm font-medium text-slate-600">No transactions recorded yet.</div>
                 @else
@@ -221,25 +313,31 @@
                 @endif
             </div>
 
-            <div class="bg-white rounded-lg shadow-md border border-slate-200 p-6">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Quick Actions</h2>
-                <div class="space-y-3">
-                    <a href="{{ route('accountant.payments.create') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold transition">
-                        <div class="flex items-center gap-2"><span>💳</span><span>Record Payment</span></div>
-                        <span class="text-sm text-slate-600">New</span>
-                    </a>
-                    <a href="{{ route('accountant.invoices.index') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-900 font-medium transition">
-                        <div class="flex items-center gap-2"><span>📄</span><span>Invoices</span></div>
-                        <span class="text-sm text-slate-600">Manage</span>
-                    </a>
-                    <a href="{{ route('accountant.payments.index') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-900 font-medium transition">
-                        <div class="flex items-center gap-2"><span>📊</span><span>Payments & Export</span></div>
-                        <span class="text-sm text-slate-600">Reports</span>
-                    </a>
-                    <a href="{{ route('admin.expenses.index') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-red-50 hover:bg-red-100 text-red-700 font-medium transition">
-                        <div class="flex items-center gap-2"><span>💰</span><span>Manage Expenses</span></div>
-                        <span class="text-sm text-slate-600">Expenses</span>
-                    </a>
+            <div class="card">
+                <div class="card-body p-6">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4">Quick Links</h2>
+                    <div class="space-y-3">
+                        <a href="{{ route('accountant.payments.create') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold transition">
+                            <div class="flex items-center gap-2"><span>💳</span><span>Record Payment</span></div>
+                            <span class="text-sm text-slate-600">New</span>
+                        </a>
+                        <a href="{{ route('accountant.invoices.index') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-900 font-medium transition">
+                            <div class="flex items-center gap-2"><span>📄</span><span>Invoices</span></div>
+                            <span class="text-sm text-slate-600">Manage</span>
+                        </a>
+                        <a href="{{ route('accountant.payments.index') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-900 font-medium transition">
+                            <div class="flex items-center gap-2"><span>📊</span><span>Payments & Export</span></div>
+                            <span class="text-sm text-slate-600">Reports</span>
+                        </a>
+                        <a href="{{ route('admin.expenses.index') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-red-50 hover:bg-red-100 text-red-700 font-medium transition">
+                            <div class="flex items-center gap-2"><span>💰</span><span>Manage Expenses</span></div>
+                            <span class="text-sm text-slate-600">Expenses</span>
+                        </a>
+                        <a href="{{ route('accountant.subscriptions.index') }}" class="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-900 font-medium transition">
+                            <div class="flex items-center gap-2"><span>📋</span><span>Subscriptions</span></div>
+                            <span class="text-sm text-slate-600">Active</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
