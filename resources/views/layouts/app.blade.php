@@ -9,9 +9,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    {{-- Custom CSS (No Tailwind) --}}
+    {{-- Tailwind CSS + Custom Styles --}}
     <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     @stack('head')
 </head>
 <body class="font-sans antialiased">
