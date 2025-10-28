@@ -119,6 +119,24 @@ Route::middleware(['auth', 'role:admin|super-admin'])->prefix('admin')->group(fu
     Route::get('/equipment/{equipment}/edit', [\App\Http\Controllers\Admin\EquipmentController::class, 'edit'])->name('admin.equipment.edit');
     Route::put('/equipment/{equipment}', [\App\Http\Controllers\Admin\EquipmentController::class, 'update'])->name('admin.equipment.update');
     Route::delete('/equipment/{equipment}', [\App\Http\Controllers\Admin\EquipmentController::class, 'destroy'])->name('admin.equipment.destroy');
+
+    // Branches Management
+    Route::get('/branches', [\App\Http\Controllers\Admin\BranchesController::class, 'index'])->name('admin.branches.index');
+    Route::get('/branches/create', [\App\Http\Controllers\Admin\BranchesController::class, 'create'])->name('admin.branches.create');
+    Route::post('/branches', [\App\Http\Controllers\Admin\BranchesController::class, 'store'])->name('admin.branches.store');
+    Route::get('/branches/{branch}', [\App\Http\Controllers\Admin\BranchesController::class, 'show'])->name('admin.branches.show');
+    Route::get('/branches/{branch}/edit', [\App\Http\Controllers\Admin\BranchesController::class, 'edit'])->name('admin.branches.edit');
+    Route::put('/branches/{branch}', [\App\Http\Controllers\Admin\BranchesController::class, 'update'])->name('admin.branches.update');
+    Route::delete('/branches/{branch}', [\App\Http\Controllers\Admin\BranchesController::class, 'destroy'])->name('admin.branches.destroy');
+
+    // Groups Management
+    Route::get('/groups', [\App\Http\Controllers\Admin\GroupsController::class, 'index'])->name('admin.groups.index');
+    Route::get('/groups/create', [\App\Http\Controllers\Admin\GroupsController::class, 'create'])->name('admin.groups.create');
+    Route::post('/groups', [\App\Http\Controllers\Admin\GroupsController::class, 'store'])->name('admin.groups.store');
+    Route::get('/groups/{group}', [\App\Http\Controllers\Admin\GroupsController::class, 'show'])->name('admin.groups.show');
+    Route::get('/groups/{group}/edit', [\App\Http\Controllers\Admin\GroupsController::class, 'edit'])->name('admin.groups.edit');
+    Route::put('/groups/{group}', [\App\Http\Controllers\Admin\GroupsController::class, 'update'])->name('admin.groups.update');
+    Route::delete('/groups/{group}', [\App\Http\Controllers\Admin\GroupsController::class, 'destroy'])->name('admin.groups.destroy');
 });
 
 Route::middleware('auth')->prefix('user')->group(function () {

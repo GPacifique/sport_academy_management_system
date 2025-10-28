@@ -170,6 +170,24 @@
                         <a href="{{ route('admin.equipment.create') }}" class="submenu-item">Add Equipment</a>
                     </div>
                 </div>
+
+                <!-- Branches -->
+                <a href="{{ route('admin.branches.index') }}" 
+                   class="nav-item {{ request()->routeIs('admin.branches.*') ? 'active' : '' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5.5m0 0H9m0 0H3.5m0 0H1"/>
+                    </svg>
+                    <span x-show="sidebarOpen" x-transition>Branches</span>
+                </a>
+
+                <!-- Groups -->
+                <a href="{{ route('admin.groups.index') }}" 
+                   class="nav-item {{ request()->routeIs('admin.groups.*') ? 'active' : '' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292m0 0H8.646m3.354 0H16m-4-8a4 4 0 100 8 4 4 0 000-8zm0 0H7.5a.5.5 0 00-.5.5v2m9 0a.5.5 0 00-.5-.5H16.5" />
+                    </svg>
+                    <span x-show="sidebarOpen" x-transition>Groups</span>
+                </a>
             </div>
             @endrole
 
