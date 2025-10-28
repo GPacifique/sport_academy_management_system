@@ -21,12 +21,13 @@ class GroupsController extends Controller
             $query->where('branch_id', $request->branch_id);
         }
 
-        // Search by name
+        // Search by name (case-insensitive)
         if ($request->has('search') && $request->search) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->search) . '%']);
         }
 
-        $groups = $query->paginate(15);
+        // Preserve query parameters in pagination links
+        $groups = $query->paginate(15)->appends($request->query());
         $branches = Branch::all();
 
         return view('admin.groups.index', compact('groups', 'branches'));

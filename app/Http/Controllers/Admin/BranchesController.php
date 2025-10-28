@@ -15,16 +15,14 @@ class BranchesController extends Controller
     {
         $query = Branch::withCount('groups', 'users', 'students');
 
-        // Search by name or code
+        // Search by name or code (case-insensitive)
         if ($request->has('search') && $request->search) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('code', 'like', '%' . $search . '%');
-            });
+            $search = strtolower($request->search);
+            $query->whereRaw('LOWER(name) LIKE ? OR LOWER(code) LIKE ?', ['%' . $search . '%', '%' . $search . '%']);
         }
 
-        $branches = $query->paginate(15);
+        // Preserve query parameters in pagination links
+        $branches = $query->paginate(15)->appends($request->query());
 
         return view('admin.branches.index', compact('branches'));
     }

@@ -30,10 +30,15 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
+                <div class="flex gap-2">
                     <button type="submit" class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition">
                         🔍 Filter
                     </button>
+                    @if(request('search') || request('branch_id'))
+                        <a href="{{ route('admin.groups.index') }}" class="px-6 py-2 bg-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-400 transition">
+                            ✕ Clear
+                        </a>
+                    @endif
                 </div>
             </form>
         </div>
