@@ -56,8 +56,13 @@ class Student extends Model
     public function getPhotoUrlAttribute(): string
     {
         if ($this->photo_path) {
-            // Try to resolve via storage link
-            return asset('storage/' . ltrim($this->photo_path, '/'));
+            // Prefer the storage disk URL (works whether or not storage:link exists)
+            try {
+                return \Illuminate\Support\Facades\Storage::disk('public')->url(ltrim($this->photo_path, '/'));
+            } catch (\Throwable $e) {
+                // Fallback to asset path if Storage driver cannot produce a URL
+                return asset('storage/' . ltrim($this->photo_path, '/'));
+            }
         }
         // Fallback avatar (SVG data URI or a generic placeholder)
         $initials = strtoupper(mb_substr($this->first_name ?? 'S', 0, 1) . mb_substr($this->second_name ?? 'T', 0, 1));
