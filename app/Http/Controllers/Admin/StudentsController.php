@@ -17,7 +17,6 @@ class StudentsController extends Controller
     {
         $students = Student::with(['branch', 'group', 'parent'])
             ->orderBy('first_name')
-            ->orderBy('last_name')
             ->paginate(15)
             ->appends($request->query());
 
