@@ -22,6 +22,7 @@
             <div>
                 <label class="block text-sm font-medium mb-1">Branch</label>
                 <select id="branch_id" name="branch_id" class="w-full border rounded px-3 py-2 dark:bg-neutral-900 dark:border-neutral-700" required>
+                    <option value="">-- Select a branch --</option>
                     @foreach ($branches as $branch)
                         <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                     @endforeach
@@ -31,6 +32,7 @@
             <div>
                 <label class="block text-sm font-medium mb-1">Group</label>
                 <select id="group_id" name="group_id" class="w-full border rounded px-3 py-2 dark:bg-neutral-900 dark:border-neutral-700" required>
+                    <option value="">-- Select a group --</option>
                     @foreach ($groups as $group)
                         <option value="{{ $group->id }}" data-branch="{{ $group->branch_id }}">{{ $group->name }}</option>
                     @endforeach
@@ -67,19 +69,50 @@
     </form>
 
     <script>
-        // filter group list by selected branch
+        // Filter group list by selected branch
         const branchSel = document.getElementById('branch_id');
         const groupSel = document.getElementById('group_id');
         const allOptions = Array.from(groupSel.options);
+
         function filterGroups() {
-            const b = branchSel.value;
+            const selectedBranch = branchSel.value;
+            
+            // Preserve the first non-data option (placeholder if exists)
+            const firstOption = allOptions[0];
+            
+            // Clear and reset with initial placeholder if exists
             groupSel.innerHTML = '';
-            allOptions.forEach(opt => {
-                if (opt.dataset.branch === b) {
-                    groupSel.appendChild(opt.cloneNode(true));
-                }
-            });
+            
+            // Add placeholder/first option back
+            if (firstOption && !firstOption.dataset.branch) {
+                groupSel.appendChild(firstOption.cloneNode(true));
+            }
+            
+            // Add filtered options based on selected branch
+            if (selectedBranch) {
+                allOptions.forEach(opt => {
+                    if (opt.dataset.branch && opt.dataset.branch === selectedBranch) {
+                        groupSel.appendChild(opt.cloneNode(true));
+                    }
+                });
+            } else {
+                // If no branch selected, add all group options
+                allOptions.forEach(opt => {
+                    if (opt.dataset.branch) {
+                        groupSel.appendChild(opt.cloneNode(true));
+                    }
+                });
+            }
         }
+
+        // Add initial placeholder option if not exists
+        if (!allOptions[0] || allOptions[0].dataset.branch) {
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = '-- Select a group --';
+            groupSel.insertBefore(placeholder, groupSel.firstChild);
+        }
+
         branchSel.addEventListener('change', filterGroups);
         filterGroups();
     </script>
