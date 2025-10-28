@@ -11,8 +11,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    {{-- Custom CSS (No Tailwind) --}}
-    <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
+        {{-- Vite: Tailwind CSS + App JS --}}
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-br from-slate-100 to-slate-200">
@@ -27,6 +27,5 @@
                 {{ $slot }}
             </div>
         </div>
-    <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

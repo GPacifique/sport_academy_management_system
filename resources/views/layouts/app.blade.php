@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    {{-- Tailwind CSS + Custom Styles --}}
-    <link rel="stylesheet" href="{{ asset('css/inline-styles.css') }}">
+    {{-- Vite: Tailwind CSS + Custom Styles --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')
 </head>
 <body class="font-sans antialiased">
@@ -126,7 +126,6 @@
 </div>
 
 @stack('scripts')
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/custom-interactions.js') }}"></script>
 </body>
 </html>
