@@ -1,6 +1,14 @@
 {
+  "resources/css/advanced.css": {
+    "file": "assets/advanced-DZ_2ZOgt.css",
+    "src": "resources/css/advanced.css",
+    "isEntry": true,
+    "names": [
+      "advanced.css"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CTnfGR26.css",
+    "file": "assets/app-DJFkHHsM.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -8,7 +16,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-D9XMXJw8.js",
+    "file": "assets/app-BF8Sbdmj.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
